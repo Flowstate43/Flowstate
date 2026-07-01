@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flowstate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Space Grotesk', sans-serif; }
+  </style>
+</head>
+<body class="bg-zinc-950 text-white">
+  <!-- Top Dashboard -->
+  <div class="bg-zinc-900 border-b border-zinc-700 py-3 px-4 md:px-6 overflow-x-auto">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 text-sm">
+      <div id="tickers" class="flex flex-wrap gap-x-6 gap-y-1 font-mono text-xs md:text-sm"></div>
+      
+      <div class="flex items-center gap-4 md:gap-8 flex-shrink-0">
+        <div id="fear-greed" class="flex items-center gap-2 whitespace-nowrap"></div>
+        <div id="signal" class="font-bold px-5 py-2 rounded-xl border-2 text-sm md:text-base"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p-6 md:p-12 text-center">
+    <h1 class="text-4xl md:text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-br from-white to-zinc-400">Welcome to Flowstate</h1>
+  </div>
+
+  <script>
+    async function updateDashboard() {
+      try {
+        const prices = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true').then(r => r.json());
+
+        let tickersHTML = '';
+        Object.keys(prices).forEach(coin => {
+          const p = prices[coin];
+          const ch = p.usd_24h_change.toFixed(1);
+          const color = ch > 0 ? 'text-emerald-400' : 'text-red-400';
+          tickersHTML += `<span class="mr-4 md:mr-6">${coin.toUpperCase()} <span class="${color}">$${p.usd.toLocaleString()} (${ch}%)</span></span>`;
+        });
+        document.getElementById('tickers').innerHTML = tickersHTML;
+
+        const fgData = await fetch('https://api.alternative.me/fng/?limit=1').then(r => r.json());
+        const fg = parseInt(fgData.data[0].value);
+        let fgColor = fg < 40 ? 'text-red-400' : 'text-emerald-400';
+        document.getElementById('fear-greed').innerHTML = `Fear & Greed: <span class="${fgColor} font-bold">${fg}</span>`;
+
+        const signalEl = document.getElementById('signal');
+        if (fg < 40) {
+          signalEl.innerHTML = "BUY THE DIP";
+          signalEl.className = "font-bold px-5 py-2 rounded-xl border-2 border-emerald-400 bg-emerald-500/10 text-emerald-400";
+        } else {
+          signalEl.innerHTML = "HOLD";
+          signalEl.className = "font-bold px-5 py-2 rounded-xl border-2 border-yellow-400 bg-yellow-500/10 text-yellow-400";
+        }
+      } catch(e) {
+        console.log("API error, using fallback");
+      }
+    }
+
+    updateDashboard();
+    setInterval(updateDashboard, 60000);
+  </script>
+</body>
+</html>
