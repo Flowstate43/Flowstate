@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flowstate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Space Grotesk', sans-serif; }
+    
+    .glass {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(32px);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.5);
+    }
+    
+    .flowstate {
+      animation: appearAndSharpen 2.8s cubic-bezier(0.23, 1, 0.32, 1) forwards,
+                 spinAndFlip 2.5s ease-in-out 3s forwards,
+                 fadeOut 2s 7s forwards;
+    }
+    
+    .enter-btn {
+      animation: popIn 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) 8.5s both;
+      box-shadow: 0 10px 0 #000, 
+                  inset 0 -6px 0 rgba(0,0,0,0.3),
+                  0 4px 15px rgba(0,0,0,0.5);
+      transition: all 0.1s ease;
+    }
+    
+    .enter-btn:active {
+      transform: translateY(6px);
+      box-shadow: 0 4px 0 #000, 
+                  inset 0 -2px 0 rgba(0,0,0,0.3);
+    }
+    
+    @keyframes appearAndSharpen {
+      0% { opacity: 0; transform: scale(0.3) translateY(100px); filter: blur(10px); }
+      60% { filter: blur(3px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0px); }
+    }
+    
+    @keyframes spinAndFlip {
+      0% { transform: scale(1) rotate(0deg); }
+      25% { transform: scale(1) rotate(360deg); }
+      50% { transform: scale(1) rotate(720deg) scaleX(-1); }
+      75% { transform: scale(1) rotate(1080deg); }
+      100% { transform: scale(1) rotate(1080deg); }
+    }
+    
+    @keyframes fadeOut {
+      to { opacity: 0; transform: translateY(-40px); }
+    }
+    
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.5); }
+      to { opacity: 1; transform: scale(1); }
+    }
+  </style>
+</head>
+<body class="bg-zinc-950 text-white min-h-screen flex items-center justify-center overflow-hidden">
+  <div class="text-center glass p-20 rounded-3xl border-2 border-cyan-400/30">
+    <h1 class="flowstate text-[5.5rem] font-bold tracking-[-0.06em] text-transparent bg-clip-text bg-gradient-to-br from-cyan-200 via-white to-purple-300">
+      Flowstate
+    </h1>
+    
+    <a href="main.html" class="enter-btn mt-16 px-14 py-6 bg-white text-black font-bold text-3xl rounded-2xl inline-block">
+      ENTER
+    </a>
+  </div>
+</body>
+</html>
