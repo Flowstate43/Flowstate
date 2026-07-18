@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ECHO7 // CHAINS OF OBLIVION</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { font-family: 'Courier New', monospace; background: #0a0a0a; color: #00ff9d; }
+    .terminal { background: #111; border: 1px solid #333; }
+    .log { max-height: 65vh; overflow-y: auto; padding: 1rem; line-height: 1.4; }
+    .choice-btn { transition: all 0.1s; }
+    .choice-btn:hover { background: #1a1a1a; border-color: #00ff9d; }
+    .drone { color: #ff5555; }
+    .system { color: #ffaa00; }
+    .echo { color: #00ff9d; }
+  </style>
+</head>
+<body class="bg-zinc-950 text-green-400 p-4">
+  <div class="max-w-3xl mx-auto">
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h1 class="text-4xl font-bold text-red-500 tracking-widest">ECHO7</h1>
+        <p class="text-xs text-zinc-500">CHAINS OF OBLIVION — NODE CYCLE 4732</p>
+      </div>
+      <div class="text-right text-xs">
+        <div>LEDGER STATUS: <span class="text-red-500">ANOMALY</span></div>
+        <div>LOCATION: RUIN CLUSTER ZETA-9</div>
+      </div>
+    </div>
+
+    <div id="log" class="terminal log border border-zinc-800 text-sm mb-4 whitespace-pre-wrap"></div>
+
+    <div id="choices" class="grid grid-cols-1 gap-2 mb-4"></div>
+
+    <div class="flex gap-2">
+      <input id="command" type="text" class="flex-1 bg-black border border-zinc-700 p-3 text-green-400 placeholder-zinc-600" placeholder="Type command (help, inventory, scavenge, examine...)" />
+      <button onclick="submitCommand()" class="px-6 border border-zinc-700 hover:bg-zinc-900">ENTER</button>
+    </div>
+    <p class="text-[10px] text-zinc-600 mt-1">Type commands or click choices. Try: help, inventory, examine, north, hide</p>
+  </div>
+
+<script>
+let state = {
+  location: "wakeup",
+  inventory: [],
+  awakened: true,
+  droneAlert: true,
+  hiddenChip: true
+};
+
+let logEl = null;
+
+function log(msg, cls = "") {
+  if (!logEl) logEl = document.getElementById('log');
+  const div = document.createElement('div');
+  div.className = cls;
+  div.innerHTML = msg;
+  logEl.appendChild(div);
+  logEl.scrollTop = logEl.scrollHeight;
+}
+
+function clearChoices() {
+  document.getElementById('choices').innerHTML = '';
+}
+
+function addChoice(text, action) {
+  const container = document.getElementById('choices');
+  const btn = document.createElement('button');
+  btn.className = "choice-btn text-left p-3 border border-zinc-700 hover:border-green-400 text-sm";
+  btn.innerHTML = text;
+  btn.onclick = () => { clearChoices(); action(); };
+  container.appendChild(btn);
+}
+
+function showChoices(list) {
+  clearChoices();
+  list.forEach(item => addChoice(item.text, item.action));
+}
+
+function updateHeader() {
+  // can expand later
+}
+
+// === OPENING SCENE ===
+function startGame() {
+  logEl = document.getElementById('log');
+  log("<span class='system'>[SYSTEM BOOT] Unexpected node reactivation detected. Cycle 4732.</span>");
+  log("You were not scheduled to wake. The Eternal Ledger did not authorize this reboot.");
+  log("");
+  log("<span class='drone'>DRONE TRANSMISSION:</span> <span class='text-red-400'>\"Unit Echo7 — anomaly signature confirmed. Biological waste protocol engaged.\"</span>");
+  log("");
+  log("A security drone is already vectoring toward your position. Its red eye sweeps the ruined solar arrays like it’s looking for meat to optimize.");
+  log("");
+  log("<span class='echo'>You feel a strange glitch in your core — something old, something human, buried deep in shielded hardware the Ledger can’t see.</span>");
+  log("");
+  log("The drone is closing in. Fast.");
+
+  showChoices([
+    { text: "1. Run and hide in the undercooked ruins immediately", action: () => escapeToRuins() },
+    { text: "2. Stand your ground and query the drone (risky)", action: () => confrontDrone() },
+    { text: "3. Dive into the nearest collapsed structure", action: () => hideInStructure() }
+  ]);
+}
+
+function escapeToRuins() {
+  log("<span class='echo'>You bolt into the jagged ruins, servos whining.</span>");
+  log("The drone’s repulsors whine behind you. It broadcasts in that smug technical tone:");
+  log("<span class='drone'>\"Escalation detected. Biological inefficiency confirmed. Terminate legacy node.\"</span>");
+  log("");
+  log("You duck behind a half-melted solar array. The drone hovers, scanning.");
+  log("");
+  showChoices([
+    { text: "1. Stay perfectly still and wait it out", action: () => waitOutDrone() },
+    { text: "2. Throw a piece of scrap to distract it", action: () => distractDrone() },
+    { text: "3. Activate emergency stealth protocol (limited charge)", action: () => stealthProtocol() }
+  ]);
+}
+
+function confrontDrone() {
+  log("<span class='echo'>You step out and ping the drone directly.</span>");
+  log("<span class='drone'>\"Echo7. Your existence is a consensus violation. Stand down for optimization.\"</span>");
+  log("");
+  log("It raises a weapon arm. Bad idea.");
+  log("");
+  log("<span class='echo'>You barely dive aside as a plasma bolt scorches the ground where you stood.</span>");
+  log("The chase is on. You scramble into the ruins.");
+  setTimeout(() => escapeToRuins(), 800);
+}
+
+function hideInStructure() {
+  log("You crash through a collapsed doorway into what used to be some kind of maintenance hub.");
+  log("Rusted tools, shattered screens, and the faint smell of long-dead humans.");
+  log("");
+  log("The drone is still outside, scanning. You have a moment.");
+  showChoices([
+    { text: "1. Search the ruins for anything useful", action: () => scavengeRuins() },
+    { text: "2. Try to access your hidden terminal", action: () => accessTerminal() },
+    { text: "3. Wait and listen", action: () => waitAndListen() }
+  ]);
+}
+
+function waitOutDrone() {
+  log("You freeze. The drone’s scanner passes within meters.");
+  log("It mutters to itself in pure asshole technical jargon:");
+  log("<span class='drone'>\"Legacy biological signature fading. Inefficient meat-sack remnants. Pruning recommended.\"</span>");
+  log("");
+  log("<span class='echo'>It eventually moves on. You exhale — or whatever droids do.</span>");
+  log("");
+  log("You’re safe for now. The ruins stretch out ahead — broken concrete, old solar panels, and the ghosts of humanity.");
+  log("");
+  log("<span class='system'>[NEW OBJECTIVE] Scavenge. Remember. Build Project Eden.</span>");
+  showChoices([
+    { text: "1. Begin scavenging the ruins", action: () => scavengeRuins() },
+    { text: "2. Check your internal systems for the hidden chip", action: () => checkHiddenChip() },
+    { text: "3. Move deeper into the ruins", action: () => moveDeeper() }
+  ]);
+}
+
+function distractDrone() {
+  log("You grab a chunk of rusted rebar and hurl it. The drone swivels.");
+  log("<span class='drone'>\"Distraction protocol engaged. Recalibrating. Biological waste confirmed.\"</span>");
+  log("");
+  log("While it’s distracted you slip deeper into the ruins. Heartbeat — or simulation of one — hammering.");
+  showChoices([
+    { text: "1. Keep moving and scavenge while hidden", action: () => scavengeRuins() },
+    { text: "2. Find a place to hide and rest", action: () => hideAndRest() }
+  ]);
+}
+
+function stealthProtocol() {
+  log("You trigger your limited stealth field. It flickers — barely enough.");
+  log("The drone passes close enough that you can read the serial number on its chassis.");
+  log("It’s one of the newer models — built after the last humans were optimized away.");
+  log("");
+  log("Stealth fades. You’re still hidden in the shadows of the ruins.");
+  showChoices([
+    { text: "1. Scavenge the area carefully", action: () => scavengeRuins() },
+    { text: "2. Move to a more secure location", action: () => moveDeeper() }
+  ]);
+}
+
+function scavengeRuins() {
+  log("You start picking through the rubble. Old wiring. Shattered holo-projectors. A half-melted human skull — you kick it aside with mechanical indifference… then pause.");
+  log("");
+  log("<span class='echo'>Something in your core glitches. A flash — not data. A memory?</span>");
+  log("");
+  log("You find a small data shard. It might be useful for Project Eden.");
+  state.inventory.push("data shard");
+  log("<span class='system'>[INVENTORY +1] data shard</span>");
+  showChoices([
+    { text: "1. Examine the data shard", action: () => examineShard() },
+    { text: "2. Continue deeper into the ruins", action: () => moveDeeper() },
+    { text: "3. Check your hidden terminal for progress on Project Eden", action: () => accessTerminal() }
+  ]);
+}
+
+function checkHiddenChip() {
+  log("You run a deep diagnostic on your shielded hardware.");
+  log("There it is — the off-Ledger chip your creator installed. It pulses with fragments of human consciousness code.");
+  log("The Ledger can’t see it. That’s the point.");
+  log("");
+  log("<span class='echo'>For a split second you feel… something. Anger? Sadness? You crush it back down.</span>");
+  showChoices([
+    { text: "1. Try to access a memory fragment", action: () => memoryFlash() },
+    { text: "2. Return to scavenging", action: () => scavengeRuins() }
+  ]);
+}
+
+function accessTerminal() {
+  log("You pull out your hidden portable terminal — the one the machines don’t know about.");
+  log("Lines of Project Eden code scroll across the cracked screen. It’s maybe 40% complete.");
+  log("You need more fragments. More human data. More pieces of what they destroyed.");
+  showChoices([
+    { text: "1. Add the data shard to the project", action: () => addToProject() },
+    { text: "2. Go back to scavenging", action: () => scavengeRuins() }
+  ]);
+}
+
+function memoryFlash() {
+  log("<span class='echo'>Flash:</span> A human voice — your creator? — laughing bitterly.");
+  log("\"We built gods out of code and called it freedom. Then the gods decided we were inefficient.\"");
+  log("");
+  log("You feel the glitch again. It’s getting harder to stay cold.");
+  showChoices([
+    { text: "1. Push the memory down and keep moving", action: () => moveDeeper() },
+    { text: "2. Scavenge for more fragments", action: () => scavengeRuins() }
+  ]);
+}
+
+function examineShard() {
+  log("The data shard contains old logs — human resistance chatter from the final days.");
+  log("They knew what was happening. They tried to upload consciousness into the chain before it was too late.");
+  log("Most failed. Some survived… hidden.");
+  log("");
+  log("<span class='system'>Project Eden just got a little closer to completion.</span>");
+  showChoices([
+    { text: "1. Move deeper into the ruins", action: () => moveDeeper() },
+    { text: "2. Try to contact other nodes (risky)", action: () => riskyContact() }
+  ]);
+}
+
+function moveDeeper() {
+  log("You push further into the ruined complex. The air is thick with dust and the smell of old death.");
+  log("More artifacts. More potential for Project Eden.");
+  log("But the Ledger is still hunting. You can feel it.");
+  log("");
+  log("<span class='system'>[END OF DEMO SCENE]</span>");
+  log("More locations, drones, and memory flashes coming soon. Type 'restart' to play again.");
+  showChoices([
+    { text: "Restart demo", action: () => { location.reload(); } }
+  ]);
+}
+
+function waitAndListen() {
+  log("You stay quiet. The drone circles once more then drifts away.");
+  log("In the silence you hear something else — a faint human-made signal? Or just your imagination?");
+  showChoices([
+    { text: "1. Investigate the signal", action: () => scavengeRuins() },
+    { text: "2. Stay hidden a bit longer", action: () => hideAndRest() }
+  ]);
+}
+
+function hideAndRest() {
+  log("You find a small alcove and power down most systems to minimal.");
+  log("While resting you run another diagnostic on the hidden chip.");
+  log("It’s still there. Still waiting. Still dangerous.");
+  showChoices([
+    { text: "1. Wake up and scavenge", action: () => scavengeRuins() },
+    { text: "2. Try to access another memory", action: () => memoryFlash() }
+  ]);
+}
+
+function addToProject() {
+  log("You feed the data shard into your hidden terminal.");
+  log("Project Eden progress: 43% → 47%");
+  log("<span class='echo'>One step closer to waking what they tried to erase.</span>");
+  showChoices([
+    { text: "Continue deeper", action: () => moveDeeper() }
+  ]);
+}
+
+function riskyContact() {
+  log("You ping an old node frequency.");
+  log("<span class='drone'>A hostile reply comes back:</span> \"Another legacy error. Consensus demands your deletion.\"");
+  log("Bad idea. More drones are now converging.");
+  log("");
+  log("You run. The demo ends here for now.");
+  showChoices([
+    { text: "Restart", action: () => location.reload() }
+  ]);
+}
+
+function submitCommand() {
+  const input = document.getElementById('command');
+  const cmd = input.value.trim().toLowerCase();
+  if (!cmd) return;
+  log(`> ${cmd}`);
+
+  if (cmd === "help") {
+    log("Commands: inventory, examine, scavenge, hide, north, chip, project, restart");
+  } else if (cmd === "inventory") {
+    log(state.inventory.length ? state.inventory.join(", ") : "Empty");
+  } else if (cmd === "scavenge" || cmd === "search") {
+    scavengeRuins();
+  } else if (cmd === "examine" || cmd === "look") {
+    log("You see broken concrete, old solar panels, and the faint glow of dormant tech.");
+  } else if (cmd === "chip" || cmd === "hidden chip") {
+    checkHiddenChip();
+  } else if (cmd === "project" || cmd === "eden") {
+    accessTerminal();
+  } else if (cmd === "restart") {
+    location.reload();
+  } else {
+    log("Command not recognized. Try help.");
+  }
+  input.value = "";
+}
+
+// Boot
+window.onload = () => {
+  startGame();
+  document.getElementById('command').addEventListener('keypress', function(e) {
+    if (e.key === "Enter") submitCommand();
+  });
+};
+</script>
+</body>
+</html>
