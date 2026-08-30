@@ -21,21 +21,33 @@
   </div>
 
   <div class="p-4 md:p-8">
-    <h1 class="text-4xl md:text-5xl font-bold mb-8 md:mb-12">Flowstate</h1>
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8 md:mb-12">
+      <h1 class="text-4xl md:text-5xl font-bold">Flowstate</h1>
+      <nav class="flex gap-4 md:gap-6 text-sm md:text-base text-zinc-400">
+        <span>News</span>
+        <span>On My Mind</span>
+        <span>Games</span>
+        <a href="log.html" class="text-amber-400 font-bold hover:text-amber-300">LoG</a>
+      </nav>
+    </div>
     
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
-      <div class="glass p-6 md:p-8 rounded-3xl border-l-4 border-cyan-400">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+      <div class="p-6 md:p-8 rounded-3xl border-l-4 border-cyan-400 bg-zinc-900/50">
         <h3 class="text-xl md:text-2xl font-bold mb-4">News</h3>
         <p class="text-zinc-400">Latest updates...</p>
       </div>
-      <div class="glass p-6 md:p-8 rounded-3xl border-l-4 border-purple-400">
+      <div class="p-6 md:p-8 rounded-3xl border-l-4 border-purple-400 bg-zinc-900/50">
         <h3 class="text-xl md:text-2xl font-bold mb-4">On My Mind</h3>
         <p class="text-zinc-400">Thoughts and ideas...</p>
       </div>
-      <div class="glass p-6 md:p-8 rounded-3xl border-l-4 border-emerald-400">
+      <div class="p-6 md:p-8 rounded-3xl border-l-4 border-emerald-400 bg-zinc-900/50">
         <h3 class="text-xl md:text-2xl font-bold mb-4">Games</h3>
         <p class="text-zinc-400">Fun stuff...</p>
       </div>
+      <a href="log.html" class="p-6 md:p-8 rounded-3xl border-l-4 border-amber-400 bg-zinc-900/50 hover:bg-zinc-900 block">
+        <h3 class="text-xl md:text-2xl font-bold mb-4">LoG</h3>
+        <p class="text-zinc-400">Everyday rants.</p>
+      </a>
     </div>
   </div>
 
