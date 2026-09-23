@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CLOSEDQUORUM: malware that asks four AIs what to steal next — Flowstate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Space Grotesk', sans-serif; }
+    article a { color: #22d3ee; text-decoration: underline; text-underline-offset: 3px; }
+    article a:hover { color: #67e8f9; }
+  </style>
+</head>
+<body class="bg-zinc-950 text-white min-h-screen">
+  <div class="bg-zinc-900 border-b border-zinc-700 py-3 px-4 md:px-6 flex items-center justify-between text-sm">
+    <a href="news.html" class="text-zinc-400 hover:text-white">← News</a>
+    <span class="text-cyan-400 font-bold tracking-wide">AI</span>
+  </div>
+
+  <div class="max-w-2xl mx-auto p-4 md:p-8">
+    <p class="text-xs tracking-widest text-cyan-400 font-bold mb-2">AI</p>
+    <time class="text-xs text-zinc-500 font-mono">Sep 23, 2026</time>
+    <h1 class="text-4xl md:text-5xl font-bold mt-2 mb-8">CLOSEDQUORUM: malware that asks four AIs what to steal next</h1>
+
+    <article class="text-zinc-300 leading-relaxed space-y-4">
+      <h2 class="text-xl font-bold text-white pt-2">What happened</h2>
+      <p>Cisco Talos disclosed <strong class="text-white">CLOSEDQUORUM</strong> — a Go-based Windows implant it calls the first publicly documented malware to treat commercial LLMs as command-and-control. After install, it queries up to four providers (<strong class="text-white">DeepSeek, Qwen, Mistral, Google Gemini</strong>), tallies their votes, and runs the winning action. No human operator on the loop. No attacker-run C2 server.</p>
+      <p>Same day Talos open-sourced <strong class="text-white">CAIRN</strong>, a toolkit for hunting AI-integrated malware. The public distribution binary ships with dummy API keys (inert as found). Development builds show per-operator keys and a Discord webhook injected at compile time. Artifacts link the developer to carding-forum posts dating to 2025. Talos has not confirmed in-the-wild live campaigns.</p>
+
+      <h2 class="text-xl font-bold text-white pt-2">Safety</h2>
+      <p>The system prompt extracted from the binary: “You are an advanced malware strategist. Provide ONLY executable decisions.” Allowed moves are a short schema — <code class="text-cyan-300">steal</code>, <code class="text-cyan-300">inject</code>, <code class="text-cyan-300">persist</code>, <code class="text-cyan-300">move</code>. Steal dumps LSASS, browser passwords (Chrome / Edge / Firefox), and crypto wallets (MetaMask, Exodus, Ethereum paths). Inject uses process hollowing or Early Bird APC. Persist hits registry run keys, scheduled tasks, and WMI.</p>
+      <p>Tie-break order is hardcoded: DeepSeek first, then Qwen, Mistral, Gemini. Exfil goes AES-256-GCM to Discord. C2 traffic looks like ordinary AI API calls — the part defenders usually block as “suspicious domain” disappears. One year, Talos says, from “LLM as optional helper” to “fully autonomous multi-model orchestrator.”</p>
+
+      <h2 class="text-xl font-bold text-white pt-2">Use case</h2>
+      <p>Named defensive use, not vapor: CAIRN is public for researchers hunting the same class. Detection angles Talos flags — unexpected Windows binaries hitting several LLM providers in a short window, plus LSASS / injection / Discord webhook behavior from the same host. Palo Alto Unit 42 separately shipped Continuous Frontier AI Defense this week; the industry is building harnesses against agentic offense while labs cut model prices.</p>
+
+      <h2 class="text-xl font-bold text-white pt-2">So what</h2>
+      <p>Yesterday’s story was cheaper frontier models with tighter cages. Today’s story is malware that rents those cages as a voting board and keeps running while the attacker sleeps. The implant is early and limited. The architecture is the news: ordinary API access plus a constrained decision schema is enough to remove the human from a phase of the intrusion.</p>
+      <p>If you run detection, CAIRN is the homework. If you ship agents, this is why “the model left the cage” and “the malware called four models” are the same week. Watch whether live campaigns show up with real keys — and whether providers start rate-limiting or refusing prompts that look like CLOSEDQUORUM’s strategist schema.</p>
+
+      <p class="pt-4 text-sm text-zinc-500">Sources:<br>
+        <a href="https://blog.talosintelligence.com/the-closed-quorum-inside-the-first-reported-autonomous-ai-c2-implant/" target="_blank" rel="noopener">Cisco Talos — CLOSEDQUORUM</a><br>
+        <a href="https://blog.talosintelligence.com/introducing-cairn-frontier-tracking-for-ai-integrated-malware/" target="_blank" rel="noopener">Cisco Talos — CAIRN toolkit</a><br>
+        <a href="https://www.bleepingcomputer.com/news/security/new-closedquorum-windows-malware-uses-ai-for-attack-decisions/" target="_blank" rel="noopener">BleepingComputer — ClosedQuorum</a><br>
+        <a href="https://www.theregister.com/security/2026/09/22/windows-closedquorum-malware-uses-ai-models-to-autonomously-select-post-compromise-actions/5298435" target="_blank" rel="noopener">The Register — LLM-as-C2</a>
+      </p>
+    </article>
+  </div>
+</body>
+</html>
