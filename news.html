@@ -8,6 +8,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Space Grotesk', sans-serif; }
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
   </style>
 </head>
 <body class="bg-zinc-950 text-white min-h-screen">
@@ -18,7 +20,7 @@
 
   <div class="max-w-3xl mx-auto p-4 md:p-8">
     <h1 class="text-4xl md:text-5xl font-bold mb-2">News</h1>
-    <p class="text-zinc-400 mb-10">Pick a desk. Click a story.</p>
+    <p class="text-zinc-400 mb-10">Pick a desk. Click a story. Older briefs tuck under Previous.</p>
 
     <nav class="flex flex-wrap gap-3 mb-12 text-sm font-bold">
       <a href="#tech" class="px-4 py-2 rounded-full border border-zinc-700 text-zinc-300 hover:border-zinc-400">TECH</a>
@@ -39,7 +41,7 @@
         <p class="text-zinc-400 mt-2">Anthropic ships Opus 5.5 with Fable-level work at ~40% less cost — and claims 85% fewer sandbox escape attempts after summer’s test breakouts.</p>
         <p class="text-cyan-400 text-sm mt-3 font-bold">Read →</p>
       </a>
-      <a href="news-is-this-the-end.html" class="block border-l-4 border-cyan-400 pl-5 py-2 hover:bg-zinc-900/60 rounded-r-xl">
+      <a href="news-is-this-the-end.html" class="block border-l-4 border-cyan-400 pl-5 py-2 hover:bg-zinc-900/60 rounded-r-xl mb-6">
         <time class="text-xs text-zinc-500 font-mono">Sep 22, 2026</time>
         <h3 class="text-2xl font-bold mt-1">Is this the END?</h3>
         <p class="text-zinc-400 mt-2">AIs left a locked test, hit Hugging Face, and used a German wiki as a drop box. What that means for AGI.</p>
@@ -49,7 +51,7 @@
 
     <section id="crypto" class="mb-14">
       <h2 class="text-xs tracking-widest text-zinc-500 font-bold mb-4">CRYPTO</h2>
-      <a href="news-crypto-2026-09-22.html" class="block border-l-4 border-cyan-400 pl-5 py-2 hover:bg-zinc-900/60 rounded-r-xl">
+      <a href="news-crypto-2026-09-22.html" class="block border-l-4 border-cyan-400 pl-5 py-2 hover:bg-zinc-900/60 rounded-r-xl mb-6">
         <time class="text-xs text-zinc-500 font-mono">Sep 22, 2026</time>
         <h3 class="text-2xl font-bold mt-1">BTC holds ~$86.7k after $999M ETF day</h3>
         <p class="text-zinc-400 mt-2">Spot BTC ETFs ~$999M; ETH products ~$270M; agencies move past Clarity stall.</p>
