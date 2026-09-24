@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude finds ART: CRISPR-like enzyme, function still unknown — Flowstate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Space Grotesk', sans-serif; }
+    article a { color: #22d3ee; text-decoration: underline; text-underline-offset: 3px; }
+    article a:hover { color: #67e8f9; }
+  </style>
+</head>
+<body class="bg-zinc-950 text-white min-h-screen">
+  <div class="bg-zinc-900 border-b border-zinc-700 py-3 px-4 md:px-6 flex items-center justify-between text-sm">
+    <a href="news.html" class="text-zinc-400 hover:text-white">← News</a>
+    <span class="text-cyan-400 font-bold tracking-wide">AI</span>
+  </div>
+
+  <div class="max-w-2xl mx-auto p-4 md:p-8">
+    <p class="text-xs tracking-widest text-cyan-400 font-bold mb-2">AI</p>
+    <time class="text-xs text-zinc-500 font-mono">Sep 24, 2026</time>
+    <h1 class="text-4xl md:text-5xl font-bold mt-2 mb-8">Claude finds ART: CRISPR-like enzyme, function still unknown</h1>
+
+    <article class="text-zinc-300 leading-relaxed space-y-4">
+      <h2 class="text-xl font-bold text-white pt-2">What happened</h2>
+      <p>Anthropic’s new life-sciences lab says <strong class="text-white">Claude</strong> autonomously spotted a previously uncharacterized enzyme system in bacteriophage DNA — <strong class="text-white">array-associated reverse transcriptases (ART)</strong> — with a CRISPR-like tandem-repeat layout. The company posted the write-up Wednesday (Sep 23) and a preprint; major press picked it up into Thursday.</p>
+      <p>The setup: high-level human prompt, then roughly <strong class="text-white">950 Claude agents</strong> for <strong class="text-white">21 hours</strong> (~210 million tokens) mining reverse-transcriptase loci across a huge sequence store (preprint: ~1.9 billion protein clusters). Agents gathered 200k+ RTs, cut to ~3,500 odd candidates, then ~20 reports for humans. One agent, reading raw DNA next to an odd RT, flagged a tandem repeat array nobody had named as a system.</p>
+      <p>ART has three parts: the RT (known in jumbo phages, not as this package), a partner gene of unknown function, and a long evenly spaced DNA-repeat array. Early lab work shows the array is expressed as distinct short RNAs — the kind of layout that makes CRISPR programmable. Anthropic is clear: <strong class="text-white">primary function is still unknown</strong>. No claim it cuts, edits, or cures anything yet.</p>
+
+      <h2 class="text-xl font-bold text-white pt-2">Safety</h2>
+      <p>This is the same week labs are arguing about bio/cyber brakes on frontier models. Anthropic’s Bay Area bench is <strong class="text-white">BSL-1 / BSL-2 only</strong> — no human-infecting pathogens. Wet-lab work stays with human scientists; Claude searched, hypothesized, and wrote reports. That line matters for dual-use: agent-scale genome mining can surface programmable-looking systems faster than a lone grad student, even when the “next CRISPR” claim is not proven.</p>
+      <p>Outside pushback is already public. Microbiologist Kevin Blake told Al Jazeera that CRISPR-like repeats in nature are common and that nothing here shows a rival to CRISPR-the-therapy. Follower hype is not evidence. Feng Zhang (MIT / Broad, CRISPR pioneer) called the RNA-repeat + RT link “genuinely intriguing” and worth more work — endorsement of the anomaly, not of a product.</p>
+
+      <h2 class="text-xl font-bold text-white pt-2">Use case</h2>
+      <p>Named real workflow, not vapor: Anthropic’s life-sciences group (stood up spring 2026) ran the campaign in <strong class="text-white">Claude Science</strong> and <strong class="text-white">Claude Code</strong> — the same tools they say any scientist can use — plus a parallel-session harness. Humans reviewed survivors and ran expression / biochemical checks in ordinary lab strains. Stanford bioengineer Stanley Qi told Al Jazeera the striking part was recognizing an unusual pattern and chasing it as a full research question in ~21 hours.</p>
+      <p>Amodei posted that the company suspects the “molecular machine” could represent a new gene-editing mechanism, and that AI is only at the “very beginning” of this kind of discovery. That is a CEO hypothesis on top of a preprint — keep it labeled as such.</p>
+
+      <h2 class="text-xl font-bold text-white pt-2">So what</h2>
+      <p>Sep 22 was cheaper Opus with a tighter cage. Sep 23 was malware voting across four LLMs. Sep 24’s lead is different: an AI agent stack that <em>noticed</em> a molecular anomaly in raw DNA and filed a candidate humans are now testing. That is closer to “science lab teammate” than “chatbot with a scoreboard.”</p>
+      <p>Believe the preprint’s process numbers; do not believe “next CRISPR” until someone shows what ART does. Watch whether other labs reproduce the agent-mining loop on public databases — and whether the next ART-class find comes with a function, not just a pretty repeat array.</p>
+
+      <p class="pt-4 text-sm text-zinc-500">Sources:<br>
+        <a href="https://www.anthropic.com/news/claude-discovers-novel-enzyme-system" target="_blank" rel="noopener">Anthropic — Claude discovers a novel enzyme system</a><br>
+        <a href="https://www-cdn.anthropic.com/22573675ada52a8ca8a97a1a4b4326b2f208a071.pdf" target="_blank" rel="noopener">Preprint PDF — Autonomous AI agents discover RTs with tandem repeat arrays</a><br>
+        <a href="https://www.aljazeera.com/economy/2026/9/24/ai-model-claude-discovers-crispr-like-enzyme-system-anthropic-says" target="_blank" rel="noopener">Al Jazeera — Claude CRISPR-like enzyme (Sep 24)</a><br>
+        <a href="https://startupfortune.com/anthropics-claude-found-a-new-enzyme-system-that-looks-like-crispr/" target="_blank" rel="noopener">Startup Fortune — ART details + Zhang quote</a>
+      </p>
+    </article>
+  </div>
+</body>
+</html>
