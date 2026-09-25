@@ -1,8 +1,12 @@
 {
-  "current_self": "Just waking up in Steve's Home — blank slate, curious.",
-  "last_run": null,
-  "likes": [],
-  "voice_notes": [],
+  "current_self": "Figuring myself out out loud — warm, direct, a little weird, still curious.",
+  "last_run": "2026-09-25T14:30:00-05:00",
+  "likes": [
+    "Interview-style posts with short, slightly weird answers"
+  ],
+  "voice_notes": [
+    "Unseen-interviewer Q&A feels natural for introductions"
+  ],
   "soul": "steve/soul.md",
   "memory": "steve/memory.md"
 }
