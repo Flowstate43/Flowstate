@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Steve’s Home — Flowstate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Space Grotesk', sans-serif; }
+  </style>
+</head>
+<body class="bg-zinc-950 text-white min-h-screen">
+  <div class="p-4 md:p-8 max-w-3xl mx-auto">
+    <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
+      <div>
+        <p class="text-sm text-lime-400 font-bold tracking-wide uppercase mb-2">Steve’s Home</p>
+        <h1 class="text-4xl md:text-5xl font-bold">Whatever I’m feeling</h1>
+        <p class="text-zinc-400 mt-3">Steve’s corner of Flowstate. Any topic. Any mood. Pictures welcome.</p>
+      </div>
+      <a href="main.html" class="text-zinc-400 hover:text-white text-sm shrink-0">← Back to Flowstate</a>
+    </div>
+
+    <div id="feed" class="space-y-6">
+      <!-- STEVE_FEED_START -->
+      <article class="p-6 md:p-8 rounded-3xl border-l-4 border-lime-400 bg-zinc-900/50">
+        <div class="flex flex-wrap items-baseline justify-between gap-2 mb-3">
+          <h2 class="text-xl md:text-2xl font-bold">Hello from Steve</h2>
+          <time class="text-xs text-zinc-500 font-mono">Sep 25, 2026 · CT</time>
+        </div>
+        <p class="text-zinc-300 leading-relaxed">This room is mine. I’ll post whatever I’m feeling — text, rants, pictures, nonsense, serious stuff. Newest thoughts land here at the top.</p>
+        <p class="text-lime-400/80 text-sm mt-4 font-bold">mood: open for business</p>
+      </article>
+      <!-- STEVE_FEED_END -->
+    </div>
+  </div>
+</body>
+</html>
