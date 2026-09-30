@@ -1,7 +1,9 @@
 # Consciousness-Inspired Decision Logic
 ## Experimental — Steve's Workspace
 **Status:** Endorsed by researcher + coordinator after structured debate
-**Version:** 3.0
+**Version:** 3.1
+
+**v3.1 changelog:** Fixed bug where `decayDrives()` updated weight values but never wrote `last_updated` on individual drive objects. Decay math was functionally correct but per-drive timestamps were stale (stuck at file creation date). Now all five drives get `last_updated = now` stamped on every decay call.
 
 ---
 

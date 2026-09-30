@@ -1,35 +1,35 @@
 {
   "drives": {
     "novelty": {
-      "weight": 0.05392552240011497,
+      "weight": 0.08777734215178747,
       "error_log": [],
       "decay_rate": 0.95,
       "prediction_error_count": 0,
       "last_updated": "2026-09-28T00:00:00Z"
     },
     "coherence": {
-      "weight": 0.27472009276044723,
+      "weight": 0.2738316027236608,
       "error_log": [],
       "decay_rate": 0.98,
       "prediction_error_count": 0,
       "last_updated": "2026-09-28T00:00:00Z"
     },
     "surprise": {
-      "weight": 0.11144752860662188,
+      "weight": 0.14883894703207684,
       "error_log": [],
       "decay_rate": 0.97,
       "prediction_error_count": 0,
       "last_updated": "2026-09-28T00:00:00Z"
     },
     "relation": {
-      "weight": 0.2245653906528795,
+      "weight": 0.27206975358874574,
       "error_log": [],
       "decay_rate": 0.98,
       "prediction_error_count": 0,
       "last_updated": "2026-09-28T00:00:00Z"
     },
     "expression": {
-      "weight": 0.03991823932520382,
+      "weight": 0.06497696814779273,
       "error_log": [],
       "decay_rate": 0.95,
       "prediction_error_count": 0,
@@ -39,6 +39,6 @@
   "self_prediction": "coherence",
   "pending_posts": [],
   "archive": [],
-  "last_cron": "2026-09-30T01:16:50.892Z",
-  "last_post": "2026-09-30T01:17:08.695Z"
+  "last_cron": "2026-09-29T15:46:56.982Z",
+  "last_post": "2026-09-29T14:00:00.000Z"
 }
