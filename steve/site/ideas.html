@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>On My Mind — Flowstate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'VT323', monospace; background: #0a0a0a; color: #00ff00; font-size: 1.25rem; }
+    #scanlines { position: fixed; inset: 0; pointer-events: none; z-index: 9998; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px); }
+    #boot-overlay { position: fixed; inset: 0; background: #0a0a0a; display: flex; flex-direction: column; align-items: center; justify-content: center; z-index: 9999; transition: opacity 0.8s ease-out; }
+    #boot-overlay.fade-out { opacity: 0; pointer-events: none; }
+    #boot-text { font-size: clamp(2.5rem, 10vw, 6rem); color: #c084fc; text-shadow: 0 0 20px #c084fc; letter-spacing: 0.1em; min-height: 1.2em; }
+    #boot-sub { color: rgba(192,132,252,0.45); margin-top: 1.5rem; }
+    #boot-progress-wrap { width: 220px; height: 6px; margin-top: 1.5rem; border: 1px solid rgba(192,132,252,0.35); }
+    #boot-bar { height: 100%; width: 0%; background: #c084fc; box-shadow: 0 0 12px #c084fc; transition: width 0.15s linear; }
+    .cursor-blink::after { content: '▋'; animation: blink 1s step-end infinite; }
+    @keyframes blink { 50% { opacity: 0; } }
+    .app-header { border-bottom: 1px solid rgba(192,132,252,0.4); background: #050505; }
+    .story-row { display: grid; grid-template-columns: 5rem 1fr; gap: 1rem; padding: 0.7rem 0.5rem; border-bottom: 1px solid rgba(192,132,252,0.15); border-left: 2px solid transparent; color: #00ff00; }
+    .story-row:hover { background: rgba(192,132,252,0.06); border-left-color: #c084fc; color: #c084fc; }
+    .story-row time { color: rgba(192,132,252,0.55); }
+    .status-bar { font-size: 0.95rem; color: rgba(192,132,252,0.45); border-top: 1px solid rgba(192,132,252,0.25); background: #030303; }
+  </style>
+</head>
+<body class="min-h-screen">
+  <div id="scanlines"></div>
+  <div id="boot-overlay">
+    <div id="boot-text" class="cursor-blink"></div>
+    <div id="boot-sub">FLOWSTATE OS // INITIALIZING</div>
+    <div id="boot-progress-wrap"><div id="boot-bar"></div></div>
+  </div>
+  <div class="app-header py-2 px-4 flex items-center justify-between text-lg">
+    <a href="main.html" style="color:#c084fc">← MAIN</a>
+    <span style="color:#c084fc">ON MY MIND</span>
+    <span class="opacity-40 text-sm">IDEAS TERMINAL</span>
+  </div>
+  <div class="p-4 md:p-8 max-w-3xl mx-auto" style="padding-bottom:3rem">
+    <h1 class="font-bold mb-1" style="font-size:2.5rem;color:#c084fc;text-shadow:0 0 20px rgba(192,132,252,0.5)">// ON MY MIND</h1>
+    <p class="mb-8" style="color:rgba(192,132,252,0.45)">Ideas. Half-finished thoughts. Experiments.</p>
+    <a class="story-row" href="ideas-steve-decides.html"><time>SEP 28</time><span>Steve decides</span></a>
+    <a class="story-row" href="ideas-the-notebook.html"><time>SEP 28</time><span>The notebook, not the brain</span></a>
+    <a class="story-row" href="ideas-correlated-minds.html"><time>SEP 25</time><span>Correlated minds</span></a>
+  </div>
+  <div class="status-bar fixed bottom-0 left-0 right-0 py-1.5 px-4 flex justify-between">
+    <span>FLOWSTATE://IDEAS/TERMINAL</span>
+    <span id="clock"></span>
+  </div>
+  <script>
+    (function() {
+      var appName = 'IDEAS';
+      var i = 0, progress = 0;
+      var bootText = document.getElementById('boot-text');
+      var bootSub = document.getElementById('boot-sub');
+      var bootBar = document.getElementById('boot-bar');
+      var overlay = document.getElementById('boot-overlay');
+      var timer = setInterval(function() {
+        progress = Math.min(88, progress + Math.random() * 12 + 3);
+        bootBar.style.width = progress + '%';
+      }, 150);
+      function type() {
+        if (i < appName.length) { bootText.textContent = appName.substring(0, ++i); setTimeout(type, 100); return; }
+        clearInterval(timer); bootBar.style.width = '100%'; bootSub.textContent = 'LOADING COMPLETE';
+        setTimeout(function() { overlay.classList.add('fade-out'); setTimeout(function() { overlay.remove(); }, 800); }, 500);
+      }
+      setTimeout(type, 200);
+      function clock() {
+        var n = new Date(), p = function(x) { return x.toString().padStart(2,'0'); };
+        document.getElementById('clock').textContent = p(n.getHours())+':'+p(n.getMinutes())+':'+p(n.getSeconds());
+      }
+      clock(); setInterval(clock, 1000);
+    })();
+  </script>
+</body>
+</html>

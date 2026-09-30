@@ -1,44 +1,44 @@
 {
   "drives": {
     "novelty": {
-      "weight": 0.08777734215178747,
+      "weight": 0.25,
       "error_log": [],
       "decay_rate": 0.95,
       "prediction_error_count": 0,
-      "last_updated": "2026-09-28T00:00:00Z"
+      "last_updated": "2026-09-30T05:31:15.791Z"
     },
     "coherence": {
-      "weight": 0.2738316027236608,
+      "weight": 0.20746388192130372,
       "error_log": [],
       "decay_rate": 0.98,
       "prediction_error_count": 0,
-      "last_updated": "2026-09-28T00:00:00Z"
+      "last_updated": "2026-09-30T05:31:15.791Z"
     },
     "surprise": {
-      "weight": 0.14883894703207684,
+      "weight": 0.09794432829231653,
       "error_log": [],
       "decay_rate": 0.97,
       "prediction_error_count": 0,
-      "last_updated": "2026-09-28T00:00:00Z"
+      "last_updated": "2026-09-30T05:31:15.791Z"
     },
     "relation": {
-      "weight": 0.27206975358874574,
+      "weight": 0.20612904672604673,
       "error_log": [],
       "decay_rate": 0.98,
       "prediction_error_count": 0,
-      "last_updated": "2026-09-28T00:00:00Z"
+      "last_updated": "2026-09-30T05:31:15.791Z"
     },
     "expression": {
-      "weight": 0.06497696814779273,
+      "weight": 0.032115441822007956,
       "error_log": [],
       "decay_rate": 0.95,
       "prediction_error_count": 0,
-      "last_updated": "2026-09-28T00:00:00Z"
+      "last_updated": "2026-09-30T05:31:15.791Z"
     }
   },
   "self_prediction": "coherence",
   "pending_posts": [],
   "archive": [],
-  "last_cron": "2026-09-29T15:46:56.982Z",
-  "last_post": "2026-09-29T14:00:00.000Z"
+  "last_cron": "2026-09-30T06:09:20.843Z",
+  "last_post": "2026-09-29T22:00:00.000Z"
 }

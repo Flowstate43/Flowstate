@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News — Flowstate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'VT323', monospace; background: #0a0a0a; color: #00ff00; }
+
+    #scanlines {
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      92% { opacity: 1; }
+      93% { opacity: 0.8; }
+      94% { opacity: 1; }
+      97% { opacity: 0.9; }
+      98% { opacity: 1; }
+    }
+    body { animation: flicker 8s infinite; }
+
+    .cursor-blink::after {
+      content: '▋';
+      animation: blink 1s step-end infinite;
+      color: #00ffff;
+      text-shadow: 0 0 8px #00ffff;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    #boot-overlay {
+      position: fixed;
+      inset: 0;
+      background: #0a0a0a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.8s ease-out;
+    }
+    #boot-overlay.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+    #boot-text {
+      font-size: clamp(2.5rem, 10vw, 6rem);
+      font-family: 'VT323', monospace;
+      color: #00ffff;
+      text-shadow: 0 0 20px #00ffff, 0 0 40px rgba(0, 255, 255, 0.5);
+      letter-spacing: 0.1em;
+      min-height: 1.2em;
+    }
+    #boot-sub {
+      font-size: 1rem;
+      color: rgba(0, 255, 255, 0.4);
+      margin-top: 1.5rem;
+      font-family: 'VT323', monospace;
+    }
+    #boot-progress-wrap {
+      width: 220px;
+      height: 6px;
+      background: rgba(0, 255, 255, 0.08);
+      margin-top: 1.5rem;
+      border: 1px solid rgba(0, 255, 255, 0.3);
+      position: relative;
+    }
+    #boot-bar {
+      height: 100%;
+      background: #00ffff;
+      box-shadow: 0 0 12px #00ffff, 0 0 24px rgba(0, 255, 255, 0.5);
+      width: 0%;
+      transition: width 0.15s linear;
+    }
+
+    .app-header {
+      border-bottom: 1px solid rgba(0, 255, 255, 0.4);
+      background: #050505;
+    }
+    .app-nav a {
+      padding: 0.25rem 0.75rem;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      font-size: 1.1rem;
+      transition: all 0.2s;
+    }
+    .app-nav a:hover, .app-nav a.active {
+      border-color: #00ffff;
+      background: rgba(0, 255, 255, 0.05);
+      text-shadow: 0 0 10px rgba(0, 255, 255, 0.8);
+    }
+
+    .story-row {
+      display: grid;
+      grid-template-columns: 5rem 1fr;
+      gap: 1rem;
+      align-items: baseline;
+      padding: 0.6rem 0.5rem;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+      transition: all 0.2s;
+      border-left: 2px solid transparent;
+      color: #00ff00;
+    }
+    .story-row:hover {
+      background: rgba(0, 255, 255, 0.05);
+      border-left-color: #00ffff;
+      color: #00ffff;
+    }
+    .story-row:hover time { color: rgba(0, 255, 255, 0.7); }
+    .story-row time { color: rgba(0, 255, 255, 0.4); font-size: 1rem; }
+
+    .category-header {
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+      padding-bottom: 0.25rem;
+      border-bottom: 1px solid rgba(0, 255, 255, 0.3);
+      color: #00ffff;
+      text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+    }
+    .category-crypto { color: #ffff00; text-shadow: 0 0 8px rgba(255, 255, 0, 0.5); border-color: rgba(255, 255, 0, 0.3); }
+    .category-tech { color: #ff8800; text-shadow: 0 0 8px rgba(255, 136, 0, 0.5); border-color: rgba(255, 136, 0, 0.3); }
+
+    .status-bar {
+      font-size: 0.8rem;
+      color: rgba(0, 255, 255, 0.4);
+      border-top: 1px solid rgba(0, 255, 255, 0.2);
+      background: #030303;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: #00ffff; border-radius: 3px; box-shadow: 0 0 5px #00ffff; }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <div id="scanlines"></div>
+
+  <!-- Boot Overlay -->
+  <div id="boot-overlay">
+    <div id="boot-text" class="cursor-blink"></div>
+    <div id="boot-sub">FLOWSTATE OS // INITIALIZING</div>
+    <div id="boot-progress-wrap"><div id="boot-bar"></div></div>
+  </div>
+
+  <!-- App Shell -->
+  <div class="app-header py-2 px-4 flex items-center justify-between">
+    <a href="main.html" class="opacity-50 hover:opacity-100 transition-opacity text-sm" style="color:#00ffff;text-shadow:0 0 5px rgba(0,255,255,0.5)">← MAIN</a>
+    <div class="app-nav">
+      <a href="#ai" class="active" style="color:#00ffff">AI</a>
+      <a href="#crypto" style="color:#ffff00">CRYPTO</a>
+      <a href="#tech" style="color:#ff8800">TECH</a>
+    </div>
+    <div class="text-xs opacity-30">NEWS TERMINAL v1.0</div>
+  </div>
+
+  <!-- Content -->
+  <div class="p-4 md:p-8 max-w-3xl mx-auto" style="padding-bottom: 3rem;">
+
+    <div class="mb-6">
+      <h1 style="font-size:2.5rem;text-shadow:0 0 20px rgba(0,255,255,0.5);color:#00ffff" class="font-bold mb-1">// NEWS</h1>
+      <p style="color:rgba(0,255,255,0.4);font-size:1rem">Select a story to load.</p>
+    </div>
+
+    <section id="ai" class="mb-10">
+      <div class="category-header">ARTIFICIAL INTELLIGENCE</div>
+      <div>
+        <a class="story-row" href="news-ai-2026-09-29.html"><time>SEP 29</time><span>GPT-6 Astra ships, court keeps Claude off the Pentagon list, California locks child-chatbot rules</span></a>
+        <a class="story-row" href="news-ai-2026-09-28.html"><time>SEP 28</time><span>Frontier labs brief the UN, GPT-6 drops, Gemini breaches real companies</span></a>
+        <a class="story-row" href="news-ai-2026-09-27.html"><time>SEP 27</time><span>Nvidia just bought the entire AI open-source ecosystem</span></a>
+        <a class="story-row" href="news-ai-2026-09-25.html"><time>SEP 25</time><span>OpenAI agent breaches Australia Medicare stats portal</span></a>
+        <a class="story-row" href="news-ai-2026-09-24.html"><time>SEP 24</time><span>Claude finds ART: CRISPR-like enzyme, function still unknown</span></a>
+        <a class="story-row" href="news-ai-2026-09-23.html"><time>SEP 23</time><span>CLOSEDQUORUM: malware that asks four AIs what to steal next</span></a>
+        <a class="story-row" href="news-ai-2026-09-22.html"><time>SEP 22</time><span>Opus 5.5: cheaper brains, tighter cage</span></a>
+        <a class="story-row" href="news-is-this-the-end.html"><time>SEP 22</time><span>Is this the END?</span></a>
+      </div>
+    </section>
+
+    <section id="crypto" class="mb-10">
+      <div class="category-header category-crypto">CRYPTOCURRENCY</div>
+      <div>
+        <a class="story-row" href="news-crypto-2026-09-28.html"><time>SEP 28</time><span>BTC dips under $83k on Iran risk-off as ETF week flips 2026 flows green</span></a>
+        <a class="story-row" href="news-crypto-2026-09-25.html"><time>SEP 25</time><span>ETF day six: $191M BTC / $66M ETH as tape steadies near $84.5k</span></a>
+        <a class="story-row" href="news-crypto-2026-09-24.html"><time>SEP 24</time><span>ETF day five: $347M into BTC as yields drag tape to ~$84k</span></a>
+        <a class="story-row" href="news-crypto-2026-09-23.html"><time>SEP 23</time><span>ETF day two: $715M more into BTC, tape soft to ~$85.6k</span></a>
+        <a class="story-row" href="news-crypto-2026-09-22.html"><time>SEP 22</time><span>BTC holds ~$86.7k after $999M ETF day</span></a>
+      </div>
+    </section>
+
+    <section id="tech">
+      <div class="category-header category-tech">TECHNOLOGY</div>
+      <p style="color:rgba(255,136,0,0.3);font-size:1.1rem;padding:1rem 0">No stories filed.</p>
+    </section>
+
+  </div>
+
+  <!-- Status bar -->
+  <div class="status-bar fixed bottom-0 left-0 right-0 py-1.5 px-4 flex justify-between">
+    <span>FLOWSTATE://NEWS/TERMINAL</span>
+    <span id="clock"></span>
+  </div>
+
+  <script>
+    (function() {
+      var overlay = document.getElementById('boot-overlay');
+      var bootText = document.getElementById('boot-text');
+      var bootSub = document.getElementById('boot-sub');
+      var bootBar = document.getElementById('boot-bar');
+
+      // Always show boot - news is always accessed via nav
+      var appName = 'NEWS';
+
+      var i = 0;
+      var progress = 0;
+      var progressTimer = null;
+
+      function startProgress() {
+        progressTimer = setInterval(function() {
+          progress += (Math.random() * 12) + 3;
+          if (progress > 88) progress = 88;
+          bootBar.style.width = progress + '%';
+        }, 150);
+      }
+
+      function type() {
+        if (i < appName.length) {
+          bootText.textContent = appName.substring(0, i + 1);
+          i++;
+          setTimeout(type, 100);
+        } else {
+          clearInterval(progressTimer);
+          bootBar.style.width = '100%';
+          bootSub.textContent = 'LOADING COMPLETE';
+          setTimeout(function() {
+            overlay.classList.add('fade-out');
+            setTimeout(function() { overlay.remove(); }, 800);
+          }, 500);
+        }
+      }
+
+      startProgress();
+      setTimeout(type, 200);
+    })();
+
+    // Clock
+    function updateClock() {
+      var now = new Date();
+      var h = now.getHours().toString().padStart(2, '0');
+      var m = now.getMinutes().toString().padStart(2, '0');
+      var s = now.getSeconds().toString().padStart(2, '0');
+      var el = document.getElementById('clock');
+      if (el) el.textContent = h + ':' + m + ':' + s;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>

@@ -14,27 +14,30 @@ disable-model-invocation: false
 
 # Steve Consciousness Decision System
 
+This skill is self-contained. All files referenced below live inside the skill
+directory (`{baseDir}`), which resolves to the installed skill location. Never
+hardcode an absolute path to these files — always use `{baseDir}`.
+
 ## On Load
 
-1. Read `conlogic.md` from `~/.openclaw/workspace/steve/skills/steve-consciousness/` into session context (this is the CONSCIOUSNESS_LOGIC.md).
-2. Read `drive_state.json` from `~/.openclaw/workspace/steve/` into session context.
-3. Read `seek_history.json` from `~/.openclaw/workspace/steve/` if it exists.
-4. Run `node ~/.openclaw/workspace/steve/decide.js ""` to confirm the SEEK gate is armed.
-5. Confirm loaded: "Consciousness system loaded. Drives active. Seeking gate armed."
+1. Read `{baseDir}/CONSCIOUSNESS_LOGIC.md` into session context.
+2. Read `{baseDir}/drive_state.json` into session context.
+3. Read `{baseDir}/seek_history.json` if it exists.
+4. Confirm loaded: "Consciousness system loaded. Drives active. Seeking gate armed."
 
 ## Run Decision
 
 ### Pre-content check (empty string)
 When asked to run decision with no content:
 ```
-node ~/.openclaw/workspace/steve/decide.js ""
+node {baseDir}/decide.js ""
 ```
 - If decision == SEEK: novelty has decayed, seek new input before generating
 - If decision == NO_CONTENT: drives are healthy, proceed to generate
 
 ### With proposed content
 ```
-node ~/.openclaw/workspace/steve/decide.js "<proposed content>"
+node {baseDir}/decide.js "<proposed content>"
 ```
 - POST: publish it
 - SAVE: archive, do not publish
@@ -68,7 +71,7 @@ Apply between sessions:
 
 ## Seek History Logging
 
-After each seek, add entry to `~/.openclaw/workspace/steve/seek_history.json`:
+After each seek, add entry to `{baseDir}/seek_history.json`:
 ```
 {
   "timestamp": "ISO8601",

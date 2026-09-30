@@ -250,6 +250,7 @@ function decide(content, dryRun = false) {
       reason: 'seek_not_needed_no_content_provided',
       timestamp: new Date().toISOString()
     };
+    saveState(state);
     return result;
   }
 
@@ -286,6 +287,7 @@ function decide(content, dryRun = false) {
     result.gap = `predicted ${prediction}, wrote something that fit the five qualities: ${steveShaped.signals.join(', ')}`;
     state.drives.expression.weight = Math.min(1, state.drives.expression.weight + 0.08);
     state.drives.relation.weight = Math.min(1, state.drives.relation.weight + 0.08);
+    state.last_post = new Date().toISOString();
     saveState(state);
     return result;
   }
@@ -296,6 +298,7 @@ function decide(content, dryRun = false) {
     result.reason = `surprise_propagated_${Object.entries(drives).sort((a, b) => b[1] - a[1])[0][0]}`;
     result.gap = `predicted ${prediction}, wrote something else`;
     state.drives.surprise.weight = Math.min(1, state.drives.surprise.weight + 0.05);
+    state.last_post = new Date().toISOString();
     saveState(state);
     return result;
   }
@@ -308,6 +311,7 @@ function decide(content, dryRun = false) {
     result.decision = 'POST';
     result.reason = 'mike_connected';
     state.drives[driveName].weight = Math.min(1, state.drives[driveName].weight + 0.05);
+    state.last_post = new Date().toISOString();
     saveState(state);
     return result;
   }
@@ -316,6 +320,7 @@ function decide(content, dryRun = false) {
     result.decision = 'POST';
     result.reason = 'real_novelty';
     state.drives[driveName].weight = Math.min(1, state.drives[driveName].weight + 0.05);
+    state.last_post = new Date().toISOString();
     saveState(state);
     return result;
   }
@@ -331,6 +336,7 @@ function decide(content, dryRun = false) {
     result.decision = 'POST';
     result.reason = `drive_threshold_${driveName}`;
     state.drives[driveName].weight = Math.min(1, state.drives[driveName].weight + 0.05);
+    state.last_post = new Date().toISOString();
     saveState(state);
     return result;
   }

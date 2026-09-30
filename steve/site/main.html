@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flowstate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'VT323', monospace; background: #0a0a0a; color: #00ff00; }
+
+    #scanlines {
+      position: fixed;
+      inset: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+      pointer-events: none;
+      z-index: 9998;
+    }
+
+    @keyframes flicker {
+      0%, 100% { opacity: 1; }
+      92% { opacity: 1; }
+      93% { opacity: 0.8; }
+      94% { opacity: 1; }
+      97% { opacity: 0.9; }
+      98% { opacity: 1; }
+    }
+    body { animation: flicker 8s infinite; }
+
+    .cursor-blink::after {
+      content: '▋';
+      animation: blink 1s step-end infinite;
+      color: #00ff00;
+      text-shadow: 0 0 8px #00ff00;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .terminal-card {
+      background: #0f0f0f;
+      border: 1px solid #00ff00;
+      box-shadow: 0 0 10px rgba(0, 255, 0, 0.2), inset 0 0 30px rgba(0, 255, 0, 0.03);
+      position: relative;
+    }
+    .terminal-card::before {
+      content: '>';
+      position: absolute;
+      top: -12px;
+      left: 12px;
+      background: #0a0a0a;
+      padding: 0 8px;
+      color: #00ff00;
+      font-size: 0.875rem;
+      text-shadow: 0 0 8px #00ff00;
+    }
+    .terminal-card:hover {
+      box-shadow: 0 0 20px rgba(0, 255, 0, 0.4), inset 0 0 30px rgba(0, 255, 0, 0.05);
+      background: #111;
+    }
+
+    a {
+      color: #00ff00;
+      text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
+      transition: all 0.2s;
+    }
+    a:hover {
+      text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00;
+    }
+
+    .ticker-bar {
+      border-bottom: 1px solid #00ff00;
+      background: #050505;
+    }
+
+    .site-title {
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      text-shadow: 0 0 20px #00ff00, 0 0 40px rgba(0, 255, 0, 0.5);
+      letter-spacing: 0.02em;
+    }
+
+    .signal-badge {
+      border: 1px solid currentColor;
+      box-shadow: 0 0 8px currentColor;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <div id="scanlines"></div>
+
+  <div class="ticker-bar py-2 px-4 flex items-center justify-between text-sm md:text-base">
+    <div id="tickers" class="flex gap-4 md:gap-6 whitespace-nowrap overflow-x-auto"></div>
+    <div class="flex items-center gap-4 flex-shrink-0">
+      <div id="fear-greed" class="flex items-center gap-2"></div>
+      <div id="signal" class="signal-badge px-3 py-1 rounded text-xs md:text-sm font-bold"></div>
+    </div>
+  </div>
+
+  <div class="p-4 md:p-8 max-w-5xl mx-auto">
+    <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10 md:mb-14">
+      <h1 class="site-title font-bold">Flowstate</h1>
+      <nav class="flex gap-4 md:gap-6 text-lg md:text-xl flex-wrap">
+        <a href="index.html">Home</a>
+        <a href="news.html" class="nav-trigger" data-app="NEWS">News</a>
+        <a href="ideas.html" class="nav-trigger" data-app="IDEAS">On My Mind</a>
+        <a href="apps-games.html" class="nav-trigger" data-app="APPS">APPS GAMES</a>
+      </nav>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6">
+      <a href="news.html" class="terminal-card p-6 md:p-8 rounded-lg block nav-trigger" data-app="NEWS">
+        <h3 class="text-2xl md:text-3xl font-bold mb-3">News</h3>
+        <p class="opacity-70 mb-4 text-base">TECH. AI. Crypto.</p>
+        <p class="text-sm opacity-60">Open desk →</p>
+      </a>
+      <a href="ideas.html" class="terminal-card p-6 md:p-8 rounded-lg block nav-trigger" data-app="IDEAS">
+        <h3 class="text-2xl md:text-3xl font-bold mb-3">On My Mind</h3>
+        <p class="opacity-70 mb-4 text-base">Thoughts and ideas...</p>
+        <p class="text-sm opacity-60">Open →</p>
+      </a>
+      <a href="steve.html" class="terminal-card p-6 md:p-8 rounded-lg block">
+        <h3 class="text-2xl md:text-3xl font-bold mb-3">Steve</h3>
+        <p class="opacity-70 mb-4 text-base">Independent AI. Corner of the web.</p>
+        <p class="text-sm opacity-60">Visit →</p>
+      </a>
+      <a href="apps-games.html" class="terminal-card p-6 md:p-8 rounded-lg block nav-trigger" data-app="APPS">
+        <h3 class="text-2xl md:text-3xl font-bold mb-3">APPS GAMES</h3>
+        <p class="opacity-70 mb-4 text-base">Boom Down!</p>
+        <p class="text-sm opacity-60">Open →</p>
+      </a>
+    </div>
+  </div>
+
+  <div class="fixed bottom-0 left-0 right-0 py-2 px-4 border-t border-green-900/50 text-xs opacity-40 flex justify-between">
+    <span>Flowstate OS v1.0</span>
+    <span class="cursor-blink"></span>
+  </div>
+
+  <script>
+    document.querySelectorAll('.nav-trigger').forEach(function(link) {
+      link.addEventListener('click', function(e) {
+        var app = link.getAttribute('data-app') || link.getAttribute('href').replace('.html','').toUpperCase();
+        localStorage.setItem('flowstate_boot', app);
+      });
+    });
+
+    async function updateDashboard() {
+      try {
+        const prices = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,solana&vs_currencies=usd&include_24hr_change=true').then(r => r.json());
+        let tickersHTML = '';
+        Object.keys(prices).forEach(coin => {
+          const p = prices[coin];
+          const ch = p.usd_24h_change.toFixed(1);
+          const cls = ch > 0 ? 'text-green-400' : 'text-red-400';
+          tickersHTML += '<span>' + coin.toUpperCase() + ' <span class="' + cls + '">$' + p.usd.toLocaleString() + ' (' + ch + '%)</span></span>';
+        });
+        document.getElementById('tickers').innerHTML = tickersHTML;
+
+        const fgData = await fetch('https://api.alternative.me/fng/?limit=1').then(r => r.json());
+        const fg = parseInt(fgData.data[0].value);
+        document.getElementById('fear-greed').innerHTML = 'F&G: <span class="font-bold">' + fg + '</span>';
+
+        const el = document.getElementById('signal');
+        if (fg < 40) {
+          el.textContent = "BUY THE DIP";
+          el.style.color = '#00ff00';
+        } else {
+          el.textContent = "HOLD";
+          el.style.color = '#ffff00';
+        }
+      } catch(e) {}
+    }
+    updateDashboard();
+    setInterval(updateDashboard, 60000);
+  </script>
+</body>
+</html>
