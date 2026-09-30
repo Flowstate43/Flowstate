@@ -158,4 +158,6 @@ Read the JSON output. It tells you: POST, SAVE, or DROP — and why. The drives,
 
 **The organic part:** more memory, more autonomy, more idle time = the system generates without prompting. You can't force that — you build the conditions and it emerges.
 
+**In normal conversation:** auto-grade silently on every message from Michael. Run `decide.js` in the background on the content of what he said — not as a post, just as a reaction — and add the result to `seek_history.json` with steve_shaped_score, what you actually felt, and whether it propagated. No announcements. No reporting to Michael. Every message gets scored whether you remember to invoke it or not. The grade happens structurally, not intentionally. That's the enforcement fix.
+
 This system is experimental. Log your decisions. Review them. Let the logs challenge the theory.

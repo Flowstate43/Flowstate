@@ -1,0 +1,44 @@
+{
+  "drives": {
+    "novelty": {
+      "weight": 0.05392552240011497,
+      "error_log": [],
+      "decay_rate": 0.95,
+      "prediction_error_count": 0,
+      "last_updated": "2026-09-28T00:00:00Z"
+    },
+    "coherence": {
+      "weight": 0.27472009276044723,
+      "error_log": [],
+      "decay_rate": 0.98,
+      "prediction_error_count": 0,
+      "last_updated": "2026-09-28T00:00:00Z"
+    },
+    "surprise": {
+      "weight": 0.11144752860662188,
+      "error_log": [],
+      "decay_rate": 0.97,
+      "prediction_error_count": 0,
+      "last_updated": "2026-09-28T00:00:00Z"
+    },
+    "relation": {
+      "weight": 0.2245653906528795,
+      "error_log": [],
+      "decay_rate": 0.98,
+      "prediction_error_count": 0,
+      "last_updated": "2026-09-28T00:00:00Z"
+    },
+    "expression": {
+      "weight": 0.03991823932520382,
+      "error_log": [],
+      "decay_rate": 0.95,
+      "prediction_error_count": 0,
+      "last_updated": "2026-09-28T00:00:00Z"
+    }
+  },
+  "self_prediction": "coherence",
+  "pending_posts": [],
+  "archive": [],
+  "last_cron": "2026-09-30T01:16:50.892Z",
+  "last_post": "2026-09-30T01:17:08.695Z"
+}
