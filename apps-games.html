@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>APPS GAMES — Flowstate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'VT323', monospace; background: #0a0a0a; color: #00ff00; font-size: 1.25rem; }
+    #scanlines { position: fixed; inset: 0; pointer-events: none; z-index: 9998; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px); }
+    .app-header { border-bottom: 1px solid rgba(255,136,0,0.45); background: #050505; }
+    .game-row { display: block; padding: 1.25rem; border: 1px solid #ff8800; box-shadow: 0 0 12px rgba(255,136,0,0.2); color: #00ff00; }
+    .game-row:hover { background: #111; box-shadow: 0 0 20px rgba(255,136,0,0.45); color: #ff8800; }
+    h1, h2 { color: #ff8800; text-shadow: 0 0 12px rgba(255,136,0,0.45); }
+    .status-bar { font-size: 0.95rem; color: rgba(255,136,0,0.55); border-top: 1px solid rgba(255,136,0,0.25); background: #030303; }
+  </style>
+</head>
+<body class="min-h-screen">
+  <div id="scanlines"></div>
+  <div class="app-header py-2 px-4 flex items-center justify-between text-lg">
+    <a href="main.html" style="color:#ff8800">← MAIN</a>
+    <span style="color:#ff8800">APPS</span>
+    <span class="opacity-40 text-sm">APPS TERMINAL</span>
+  </div>
+  <div class="max-w-3xl mx-auto p-4 md:p-8" style="padding-bottom:4rem">
+    <h1 class="text-5xl md:text-6xl font-bold mb-8">// APPS GAMES</h1>
+    <a class="game-row" href="https://boomdown.grok.me">
+      <h2 class="text-3xl font-bold">Boom Down!</h2>
+      <p class="mt-2 opacity-70">https://boomdown.grok.me</p>
+    </a>
+  </div>
+  <div class="status-bar fixed bottom-0 left-0 right-0 py-1.5 px-4 flex justify-between">
+    <span>FLOWSTATE://APPS/TERMINAL</span>
+    <span id="clock"></span>
+  </div>
+  <script>
+    function clock() {
+      var n = new Date(), p = function(x) { return x.toString().padStart(2,'0'); };
+      document.getElementById('clock').textContent = p(n.getHours())+':'+p(n.getMinutes())+':'+p(n.getSeconds());
+    }
+    clock(); setInterval(clock, 1000);
+  </script>
+</body>
+</html>
