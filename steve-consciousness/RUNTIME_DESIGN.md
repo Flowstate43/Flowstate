@@ -1,7 +1,7 @@
 # Steve Continuous Runtime — Design Spec
 
-> Status: **DESIGN ONLY** — not implemented. Locked in via discussion with Mike on 2026-09-30.
-> Nothing here is built until Mike explicitly greenlights implementation.
+> Status: **IMPLEMENTED (v1 — fixed mapping)**. Built 2026-09-30 with Mike.
+> Paced loop live with deterministic novelty→cadence rule. Free-choice (LLM-judged) cadence is a later upgrade.
 
 ---
 
@@ -23,15 +23,15 @@ Steve's main session (`agent:steve:main`) runs a **paced loop**: after each proc
 
 ### 2. Watchdog Cron (backup)
 
-Keep **one** watchdog cron as a system health check — fires every 4–6 hours.
+**Implemented as a 2x daily cron** (every 12h, America/Chicago) — a fallback trigger.
 
-- Checks: is Steve's session alive? Is `drive_state.json` readable? Are timestamps updating?
-- Does **not** run Steve's full decision logic — it's a pulse check, not a decision run.
-- Purpose: catch failures if the paced loop ever goes dark.
+- Fires SEEK/POST decision logic if the paced loop goes dark.
+- Presence log on zero-post days.
+- Replaces the earlier "4–6h system health check" idea with a simpler 2x daily fallback.
 
-### 3. Current Cron
+### 3. Current Heartbeat
 
-The existing `steve-corner-posts` cron (4-hour) gets **disabled** once the paced loop is proven live. It becomes redundant.
+The 60-min heartbeat (`steve-corner-posts`) remains the **primary** nudge. It was not disabled — it now carries the pacing bounds and self-scheduling payload. The separate 2x daily cron is the backup.
 
 ---
 
@@ -101,8 +101,9 @@ Backup: `github.com/Flowstate43/Flowstate`
 
 ## Status
 
-- [ ] Paced loop implemented
-- [ ] Watchdog cron created
-- [ ] Current `steve-corner-posts` cron disabled
+- [x] Paced loop implemented (fixed novelty→cadence mapping, 30m–3h clamp)
+- [x] Backup cron (2x daily, America/Chicago) as watchdog
+- [ ] 60-min heartbeat retained as primary nudge (still active, not disabled)
 - [ ] 3-day context refresh built
 - [ ] Curiosity crawler (future)
+- [ ] Free-choice (LLM-judged) cadence — upgrade after fixed mapping is proven
