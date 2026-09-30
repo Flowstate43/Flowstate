@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ETF day two: $715M more into BTC, tape soft to ~$85.6k — Flowstate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'VT323', monospace; background: #0a0a0a; color: #00ff00; font-size: 1.25rem; }
+    #scanlines {
+      position: fixed; inset: 0; pointer-events: none; z-index: 9998;
+      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px);
+    }
+    .app-header { border-bottom: 1px solid #ffff0066; background: #050505; }
+    .back { color: #ffff00; text-shadow: 0 0 5px #ffff0088; }
+    h1 { color: #ffff00; text-shadow: 0 0 16px #ffff0088; line-height: 1.05; }
+    .kicker, time { color: #ffff00; opacity: 0.7; }
+    article h2, article strong { color: #ffff00; }
+    article p, article li { color: #b6ffb6; line-height: 1.45; }
+    article a { color: #ffff00; text-decoration: underline; text-underline-offset: 3px; }
+    article ul { margin: 0.5rem 0 0.5rem 1.25rem; list-style: disc; }
+    .status-bar {
+      font-size: 0.95rem; color: #ffff0088; border-top: 1px solid #ffff0044; background: #030303;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <div id="scanlines"></div>
+  <div class="app-header py-2 px-4 flex items-center justify-between text-lg">
+    <a href="news.html" class="back">← NEWS</a>
+    <span style="color:#ffff00">CRYPTO</span>
+    <span class="opacity-40 text-sm">NEWS TERMINAL</span>
+  </div>
+  <div class="max-w-3xl mx-auto p-4 md:p-8" style="padding-bottom:4rem">
+    <p class="kicker tracking-widest mb-1">CRYPTO</p>
+    <time>Sep 23, 2026</time>
+    <h1 class="text-4xl md:text-5xl font-bold mt-2 mb-8">ETF day two: $715M more into BTC, tape soft to ~$85.6k</h1>
+    <article class="space-y-4">
+<ul class="list-disc pl-5 space-y-2">
+        <li>U.S. spot Bitcoin ETFs took in ~$714.75 million net on Sept 22 (SoSoValue / Farside) — day two after Monday’s ~$999M print. BlackRock IBIT ~$350M; Fidelity FBTC ~$257M.</li>
+        <li>Two-session BTC ETF haul ~$1.71 billion. Spot Ether ETFs added ~$162M on Tuesday (ETHA ~$88M, FETH ~$34M). Solana products ~$29M. Combined crypto ETF day ~$906–$926M depending on the tape source.</li>
+        <li>Morning prices (CT): BTC ~$85,640 (CoinGecko) / ~$85,650 (Yahoo); ETH ~$2,713 (CoinGecko / Yahoo). Soft overnight after a session high near ~$87.2k.</li>
+        <li>XRP ETFs printed their biggest September day (~$20M, Bitwise-led). SOL ~$119; XRP held near ~$1.62 after a ~7% pop Tuesday.</li>
+        <li>Policy backdrop unchanged: Clarity Act still stalled after Sept 15 cloture fail; SEC Innovation Exemption and CFTC prerule remain the agency path around Congress.</li>
+        <li>Watch: whether Wednesday flows hold after two heavy prints, and whether the pullback from ~$87k is digestion or the start of fade.</li>
+      </ul>
+
+      <p class="pt-2"><strong class="text-white">So what:</strong> Monday’s near-$1B BTC ETF day was not a one-off. Institutions bought again Tuesday while spot gave back some of the squeeze. Research only — next data point is today’s close and the flow print.</p>
+
+      <p class="pt-4 text-sm text-zinc-500">Sources:<br>
+        <a href="https://financefeeds.com/crypto-etf-inflows-reach-906-million-on-september-22-as-bitcoin-funds-extend-buying-streak/" target="_blank" rel="noopener">FinanceFeeds — Sept 22 ETF flows</a><br>
+        <a href="https://www.tronweekly.com/bitcoin-etfs-add-1-7b-in-two-days-as-btc-breaks/" target="_blank" rel="noopener">TronWeekly — $1.7B two-day BTC ETF haul</a><br>
+        <a href="https://en.theblockbeats.news/flash/368566" target="_blank" rel="noopener">BlockBeats — Farside Sept 22 print</a><br>
+        <a href="https://finance.yahoo.com/quote/BTC-USD/" target="_blank" rel="noopener">Yahoo Finance — BTC-USD</a><br>
+        <a href="https://www.coingecko.com/en/coins/bitcoin" target="_blank" rel="noopener">CoinGecko — BTC / ETH</a>
+      </p>
+    </article>
+  </div>
+  <div class="status-bar fixed bottom-0 left-0 right-0 py-1.5 px-4 flex justify-between">
+    <span>FLOWSTATE://NEWS/CRYPTO</span>
+    <span id="clock"></span>
+  </div>
+  <script>
+    function updateClock() {
+      var now = new Date();
+      var p = n => n.toString().padStart(2, '0');
+      var el = document.getElementById('clock');
+      if (el) el.textContent = p(now.getHours()) + ':' + p(now.getMinutes()) + ':' + p(now.getSeconds());
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
