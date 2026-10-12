@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Father Absence and the Outcome Gap — On My Mind — Flowstate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'VT323', monospace; background: #0a0a0a; color: #00ff00; font-size: 1.25rem; }
+    #scanlines { position: fixed; inset: 0; pointer-events: none; z-index: 9998; background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px); }
+    .app-header { border-bottom: 1px solid rgba(192,132,252,0.4); background: #050505; }
+    h1, h2, .kicker, time { color: #c084fc; }
+    h1 { text-shadow: 0 0 16px rgba(192,132,252,0.45); line-height: 1.05; }
+    article p { color: #b6ffb6; line-height: 1.45; }
+    article a { color: #c084fc; text-decoration: underline; text-underline-offset: 3px; }
+    .status-bar { font-size: 0.95rem; color: rgba(192,132,252,0.5); border-top: 1px solid rgba(192,132,252,0.25); background: #030303; }
+  </style>
+</head>
+<body class="min-h-screen">
+  <div id="scanlines"></div>
+  <div class="app-header py-2 px-4 flex items-center justify-between text-lg">
+    <a href="ideas.html" style="color:#c084fc">← IDEAS</a>
+    <span style="color:#c084fc">ON MY MIND</span>
+    <span class="opacity-40 text-sm">IDEAS TERMINAL</span>
+  </div>
+  <article class="max-w-3xl mx-auto p-4 md:p-8" style="padding-bottom:4rem">
+    <p class="kicker tracking-widest">IDEAS</p>
+    <time>Oct 11, 2026 · CT</time>
+    <h1 class="text-4xl md:text-5xl font-bold mt-2 mb-4">Father Absence and the Outcome Gap</h1>
+    <p class="mb-8" style="color:#c084fc">Kids with a resident father average better speech, school, and work habits. The race gap tracks how common that is.</p>
+    <div class="space-y-5">
+      <p>At work the pattern is plain. The kids who have a father in the house, especially the Black kids, are more well-spoken and they work. The ones without are not. That matches the data.</p>
+      <p>Father absence is linked across races to lower high-school completion, more externalizing behavior, and weaker later employment attachment. Reviews of stricter designs still find those effects. Language and work habits show up early because fathers tend to use more complex, questioning speech and two parents supply more consistent structure and resources.</p>
+      <h2 class="text-2xl font-bold pt-4">The prevalence difference</h2>
+      <p>CDC 2023: 69% of non-Hispanic Black births were to unmarried mothers versus 27% for non-Hispanic White mothers. Household measures show the same gap in father-absent homes. When a risk factor is that much more common in one group, the group averages move with it.</p>
+      <h2 class="text-2xl font-bold pt-4">Structure reverses the gap</h2>
+      <p>Institute for Family Studies analysis of NLSY97: Black young adults raised in intact two-parent homes outperform White young adults raised in single-parent homes on college graduation, poverty avoidance, and avoiding incarceration. Example: 36% of young Black women from intact families graduated college versus 28% of young White women from single-parent families. 14% of young Black men from intact families had been incarcerated versus 18% of young White men from single-parent families.</p>
+      <p>The benefit of a resident, involved father is not race-specific. Race mainly tracks how often kids get that variable. Intact Black families do not show the elevated problem rates; the disparity tracks the structure gap.</p>
+      <p style="color:rgba(192,132,252,0.7)">Averages, not destiny. Selection exists. Income mediates a large share. The pattern still holds.</p>
+    </div>
+  </article>
+  <div class="status-bar fixed bottom-0 left-0 right-0 py-1.5 px-4 flex justify-between">
+    <span>FLOWSTATE://IDEAS/FAMILY</span>
+    <span id="clock"></span>
+  </div>
+  <script>
+    function clock() {
+      var n = new Date(), p = function(x) { return x.toString().padStart(2,'0'); };
+      document.getElementById('clock').textContent = p(n.getHours())+':'+p(n.getMinutes())+':'+p(n.getSeconds());
+    }
+    clock(); setInterval(clock, 1000);
+  </script>
+</body>
+</html>
