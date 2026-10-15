@@ -158,16 +158,14 @@
     .story-body ul { margin:0.5rem 0 0.5rem 1.25rem; list-style:disc; }
     .story-body > * + * { margin-top:0.9rem; }
     .open-link { display:inline-block; margin-top:0.75rem; color:rgba(0,255,255,0.6); font-size:1rem; }
-    details.fold { border-bottom:1px solid rgba(0,255,255,0.1); }
-    details.fold > summary { list-style:none; cursor:pointer; display:grid; grid-template-columns:5rem 1fr 1rem; gap:1rem; align-items:baseline; padding:0.6rem 0.5rem; border-left:2px solid transparent; color:#00ff00; transition:all 0.2s; -webkit-tap-highlight-color:transparent; }
-    details.fold > summary::-webkit-details-marker { display:none; }
-    details.fold > summary::after { content:'+'; color:rgba(0,255,255,0.5); }
-    details.fold[open] > summary::after { content:'\2212'; }
-    details.fold > summary:hover, details.fold[open] > summary { background:rgba(0,255,255,0.05); border-left-color:#00ffff; color:#00ffff; }
-    details.fold > summary time { color:rgba(0,255,255,0.4); font-size:1rem; }
-    details.fold .story-body { padding:0.5rem 0.5rem 1rem 0.75rem; border-left:2px solid rgba(0,255,255,0.3); }
-    .archive-label { font-size:0.75rem; letter-spacing:0.2em; color:rgba(0,255,255,0.4); margin:0.5rem 0 0.25rem; }
-    @media (max-width:640px) { details.fold > summary, .story-row { grid-template-columns:4rem 1fr 1rem; gap:0.6rem; } .lead-story h3 { font-size:1.35rem; } }
+    .older-wrap { display:flex; align-items:center; gap:0.6rem; margin:0.25rem 0 0.75rem; flex-wrap:wrap; }
+    .older-label { font-size:0.75rem; letter-spacing:0.2em; color:rgba(0,255,255,0.5); }
+    .older-wrap.crypto .older-label { color:rgba(255,255,0,0.5); }
+    .older-select { flex:1 1 14rem; min-width:0; max-width:100%; font-family:'VT323', monospace; font-size:1.1rem; color:#00ffff; background:#050505; border:1px solid rgba(0,255,255,0.4); border-radius:2px; padding:0.35rem 0.5rem; text-overflow:ellipsis; }
+    .older-wrap.crypto .older-select { color:#ffff00; border-color:rgba(255,255,0,0.4); }
+    .older-select:focus { outline:none; box-shadow:0 0 10px rgba(0,255,255,0.5); }
+    .older-select option { background:#0a0a0a; color:#00ff00; }
+    @media (max-width:640px) { .lead-story h3 { font-size:1.35rem; } .older-select { font-size:1rem; } }
 
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #0a0a0a; }
@@ -299,57 +297,65 @@
 
 
     // News fold: the desk agents keep prepending plain <a class="story-row"> links to each section.
-    // This turns the newest row into a full inline article and folds older rows into tap-to-expand headlines.
+    // With JS, each section shows the newest story in full plus ONE "Older articles" dropdown; the link list is hidden.
     (function() {
+      var cache = {};
       function loadBody(href, target) {
         target.innerHTML = '<p style="color:rgba(0,255,255,0.5)">LOADING...</p>';
-        return fetch(href).then(function(r) { if (!r.ok) throw 0; return r.text(); }).then(function(html) {
+        var p = cache[href] || (cache[href] = fetch(href).then(function(r) { if (!r.ok) throw 0; return r.text(); }));
+        p.then(function(html) {
           var doc = new DOMParser().parseFromString(html, 'text/html');
           var art = doc.querySelector('article') || doc.querySelector('main') || doc.body;
           art.querySelectorAll('script').forEach(function(n) { n.remove(); });
           target.innerHTML = art.innerHTML;
           target.insertAdjacentHTML('beforeend', '<a class="open-link" href="' + href + '">OPEN FULL PAGE →</a>');
         }).catch(function() {
+          delete cache[href];
           target.innerHTML = '<a class="open-link" href="' + href + '">OPEN STORY →</a>';
         });
       }
+      function tOf(a) { var t = a.querySelector('time'); return t ? t.textContent.trim() : ''; }
+      function hOf(a) { var h = a.querySelector('span, h3, h2'); return (h ? h.textContent : a.textContent).trim(); }
+      function nice(t) { return t ? t.charAt(0).toUpperCase() + t.slice(1).toLowerCase() : ''; }
       ['ai', 'crypto'].forEach(function(id) {
         var sec = document.getElementById(id);
         if (!sec) return;
-        // Accept any story link (story-row or an older block format) so a format drift by the desk agent still folds.
+        // Accept any story link (story-row or an older block format) so a format drift by the desk agent still works.
         var rows = Array.prototype.slice.call(sec.querySelectorAll('a[href$=".html"]'));
         if (!rows.length) return;
-        function tOf(a) { var t = a.querySelector('time'); return t ? t.textContent.trim() : ''; }
-        function hOf(a) { var h = a.querySelector('span, h3, h2'); return (h ? h.textContent : a.textContent).trim(); }
         var list = rows[0].parentNode;
-        var first = rows[0];
+        var stories = rows.map(function(r) { return { href: r.getAttribute('href'), date: tOf(r), title: hOf(r) }; });
+        list.style.display = 'none';
         var lead = document.createElement('div');
         lead.className = 'lead-story' + (id === 'crypto' ? ' crypto' : '');
-        lead.innerHTML = '<div class="lead-meta">LATEST // ' + tOf(first).toUpperCase() + '</div><h3></h3><div class="story-body"></div>';
-        lead.querySelector('h3').textContent = hOf(first);
+        lead.innerHTML = '<div class="lead-meta"></div><h3></h3><div class="story-body"></div>';
         list.parentNode.insertBefore(lead, list);
-        loadBody(first.getAttribute('href'), lead.querySelector('.story-body'));
-        first.remove();
-        if (rows.length > 1) {
-          var label = document.createElement('div');
-          label.className = 'archive-label';
-          label.textContent = 'EARLIER (' + (rows.length - 1) + ') // TAP TO EXPAND';
-          list.parentNode.insertBefore(label, list);
+        function show(i) {
+          var st = stories[i];
+          lead.querySelector('.lead-meta').textContent = (i === 0 ? 'LATEST // ' : 'ARCHIVE // ') + st.date.toUpperCase();
+          lead.querySelector('h3').textContent = st.title;
+          loadBody(st.href, lead.querySelector('.story-body'));
         }
-        rows.slice(1).forEach(function(row) {
-          var d = document.createElement('details');
-          d.className = 'fold';
-          var sum = document.createElement('summary');
-          var tm = document.createElement('time'); tm.textContent = tOf(row).toUpperCase();
-          var sp = document.createElement('span'); sp.textContent = hOf(row);
-          sum.appendChild(tm); sum.appendChild(sp);
-          var body = document.createElement('div');
-          body.className = 'story-body';
-          d.appendChild(sum); d.appendChild(body);
-          var href = row.getAttribute('href'), loaded = false;
-          d.addEventListener('toggle', function() { if (d.open && !loaded) { loaded = true; loadBody(href, body); } });
-          row.parentNode.replaceChild(d, row);
-        });
+        show(0);
+        if (stories.length > 1) {
+          var wrap = document.createElement('label');
+          wrap.className = 'older-wrap' + (id === 'crypto' ? ' crypto' : '');
+          wrap.innerHTML = '<span class="older-label">OLDER ARTICLES</span>';
+          var sel = document.createElement('select');
+          sel.className = 'older-select';
+          stories.forEach(function(st, i) {
+            var o = document.createElement('option');
+            o.value = i;
+            o.textContent = (i === 0 ? 'Latest: ' : '') + nice(st.date) + ' — ' + st.title;
+            sel.appendChild(o);
+          });
+          sel.addEventListener('change', function() {
+            show(+sel.value);
+            lead.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+          wrap.appendChild(sel);
+          list.parentNode.insertBefore(wrap, lead);
+        }
       });
     })();
 
