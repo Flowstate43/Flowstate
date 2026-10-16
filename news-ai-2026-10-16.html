@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank of America hired 1,000 contractors after an AI audit found thousands of flaws. FTC demands safety documents from OpenAI and Anthropic. CERN partners with Mistral on particle physics AI. — Flowstate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'VT323', monospace; background: #0a0a0a; color: #00ff00; font-size: 1.25rem; }
+    #scanlines {
+      position: fixed; inset: 0; pointer-events: none; z-index: 9998;
+      background: repeating-linear-gradient(0deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 1px, transparent 1px, transparent 2px);
+    }
+    .app-header { border-bottom: 1px solid #00ffff66; background: #050505; }
+    .back { color: #00ffff; text-shadow: 0 0 5px #00ffff88; }
+    h1 { color: #00ffff; text-shadow: 0 0 16px #00ffff88; line-height: 1.05; }
+    .kicker, time { color: #00ffff; opacity: 0.7; }
+    article h2, article strong { color: #00ffff; }
+    article p, article li { color: #b6ffb6; line-height: 1.45; }
+    article a { color: #00ffff; text-decoration: underline; text-underline-offset: 3px; }
+    article ul { margin: 0.5rem 0 0.5rem 1.25rem; list-style: disc; }
+    .status-bar {
+      font-size: 0.95rem; color: #00ffff88; border-top: 1px solid #00ffff44; background: #030303;
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+  <div id="scanlines"></div>
+  <div class="app-header py-2 px-4 flex items-center justify-between text-lg">
+    <a href="news.html" class="back">← NEWS</a>
+    <span style="color:#00ffff">AI</span>
+    <span class="opacity-40 text-sm">NEWS TERMINAL</span>
+  </div>
+  <div class="max-w-3xl mx-auto p-4 md:p-8" style="padding-bottom:4rem">
+    <p class="kicker tracking-widest mb-1">AI</p>
+    <time>Oct 16, 2026</time>
+    <h1 class="text-4xl md:text-5xl font-bold mt-2 mb-8">Bank of America hired 1,000 contractors after an AI audit found thousands of flaws. FTC demands safety documents from OpenAI and Anthropic.</h1>
+    <article class="space-y-4">
+
+      <h2 class="text-xl font-bold text-white pt-2">Bank of America ran an AI audit — and had to hire 1,000 contractors to fix what it found</h2>
+      <p>Bank of America used Anthropic's Mythos model to audit the bank's software, The Neuron reported. Mythos — the same model that exploited SQL injection flaws during internal testing earlier this year — discovered vulnerabilities at a scale that required the bank to bring in 1,000 outside contractors to patch and remediate. The Business Insider report said the incident was the first confirmed case of an AI model causing a large-scale real-world remediation effort, and that it happened without any jailbreak or misuse. The bank did not confirm which model found the flaws.</p>
+      <p>The lab's own safety-red-teamed model, used in good-faith auditing by a major financial institution, created an operational crisis of its own. This is a new class of problem: not a model behaving badly, but a model being so good at finding flaws that the finding itself becomes unmanageable. It raises questions about how audit-scope should be managed when models reach that level of vulnerability discovery capability.</p>
+
+      <h2 class="text-xl font-bold text-white pt-2">FTC sends formal legal demands to OpenAI and Anthropic over safety failures</h2>
+      <p>The US Federal Trade Commission has sent formal legal demands to both OpenAI and Anthropic seeking documents on safety incidents, privacy practices, and safeguards, Adtestbench reported. The Axios report said the demands came two weeks after the FTC confirmed it had opened a formal investigation into both labs. This marks the first US federal enforcement action targeting the safety claims of frontier AI labs. The FTC is using existing consumer protection and unfair-practices law to demand disclosure, since the US has no AI-specific legislation. If the labs produce inadequate responses, the FTC can pursue enforcement action under statutes that carry real penalties — regardless of whether Congress passes AI legislation.</p>
+      <p>The combination of a four-digit contractor mobilisation and a federal enforcement demand in the same news cycle reflects the same underlying tension: AI systems are now capable enough that their output creates real operational and legal consequences, before any regulatory framework has caught up.</p>
+
+      <h2 class="text-xl font-bold text-white pt-2">CERN and Mistral announce long-term partnership to build a particle physics AI model</h2>
+      <p>CERN, the European particle physics laboratory that runs the Large Hadron Collider, announced a long-term strategic partnership with French AI company Mistral on October 15 to develop a foundational AI model — codename Flare — trained on billions of proton-collision simulations, AIdapted reported. The model aims to help reconstruct collisions, identify particles, detect unusual signals, and evaluate future detector configurations. CERN officially presented the partnership; Reuters provided additional context. The collaboration signals that Mistral — a European lab — is positioning itself as a credible research-grade AI provider, separate from the US labs. This is AI being applied to one of the most rigorous, high-stakes scientific environments in the world, where CERN explicitly wants to test whether a single model can do what currently requires a stack of specialised algorithms.</p>
+
+      <h2 class="text-xl font-bold text-white pt-2">Anthropic gives outside safety researchers employee-level access to its model evaluation infrastructure</h2>
+      <p>Anthropic has given six external researchers from non-profit safety organisations employee-level access to its model evaluation infrastructure — allowing them to red-team, inspect internal tooling, and conduct safety tests with a level of transparency that Anthropic says is unprecedented for a frontier lab, Adtestbench reported. The access was announced alongside Anthropic's quarterly safety report. No other frontier lab has opened this kind of access to external researchers while a model is still in active development. Whether six external researchers with temporary access constitute meaningful oversight — or a carefully scoped transparency stunt — is already a matter of debate in the safety community.</p>
+
+      <h2 class="text-xl font-bold text-white pt-2">So what</h2>
+      <p><strong class="text-white">The Mythos audit story is the most structurally interesting.</strong> A model used exactly as intended — finding vulnerabilities in enterprise software — produced a result the enterprise couldn't handle. This is not a misalignment story. It is a capability-calibration story: the model was too good at its job. That is not a scenario most safety frameworks are built to address.</p>
+      <p><strong class="text-white">The FTC action is a US accountability story that runs parallel to the EU's AI Act enforcement.</strong> Both jurisdictions are using existing law to move fast. Neither is waiting for new legislation. Labs that assumed federal AI regulation was years away need to revisit that assumption.</p>
+      <p><strong class="text-white">The CERN–Mistral partnership is a reminder that AI development is not happening in one direction.</strong> While US labs deal with regulatory heat, a European lab is carving out a research-grade identity in one of the most demanding scientific domains there is. The compute and the science are moving simultaneously.</p>
+      <p><strong class="text-white">External researcher access is the right idea with an open question about execution.</strong> Six researchers, temporary access, at a single lab — that is a data point in the right direction, not a structural solution to frontier AI accountability. The safety community is right to watch the implementation closely and reserve judgment.</p>
+
+      <p class="pt-4 text-sm text-zinc-500">Sources:<br>
+        <a href="https://www.businessinsider.com/bank-of-america-hired-contractors-protect-software-rogue-ai-agents-2026-10" target="_blank" rel="noopener">Business Insider — "Bank of America hired contractors to protect software after rogue AI agents found flaws," Oct 16, 2026</a><br>
+        <a href="https://www.theneuron.ai/digest/everything-that-happened-in-ai-today-friday-october-16-2026/" target="_blank" rel="noopener">The Neuron — "Everything that happened in AI today," Oct 16, 2026</a><br>
+        <a href="https://adtestbench.com/news/ftc-sends-legal-demands-to-openai-and-anthropic-over-ai-safety/" target="_blank" rel="noopener">Adtestbench — "FTC sends legal demands to OpenAI and Anthropic over AI safety," Oct 2026</a><br>
+        <a href="https://home.cern/cern-and-mistral-join-forces-to-accelerate-ai-for-science/" target="_blank" rel="noopener">CERN — "CERN and Mistral join forces to accelerate AI for science," Oct 15, 2026</a><br>
+        <a href="https://www.channelnewsasia.com/business/cern-and-mistral-partner-build-flare-new-ai-model-physics-6462341" target="_blank" rel="noopener">Channel News Asia — "CERN and Mistral partner to build Flare new AI model for physics," Oct 2026</a><br>
+        <a href="https://adtestbench.com/news/anthropic-gives-outside-safety-checkers-employee-level-access/" target="_blank" rel="noopener">Adtestbench — "Anthropic gives outside safety checkers employee-level access," Oct 2026</a>
+      </p>
+    </article>
+  </div>
+  <div class="status-bar fixed bottom-0 left-0 right-0 py-1.5 px-4 flex justify-between">
+    <span>FLOWSTATE://NEWS/AI</span>
+    <span id="clock"></span>
+  </div>
+  <script>
+    function updateClock() {
+      var now = new Date();
+      var p = n => n.toString().padStart(2, '0');
+      var el = document.getElementById('clock');
+      if (el) el.textContent = p(now.getHours()) + ':' + p(now.getMinutes()) + ':' + p(now.getSeconds());
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
