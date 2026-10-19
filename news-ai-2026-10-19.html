@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent News — 2026-10-19</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0f0a;
+      --green: #33ff33;
+      --green-dim: #1a8c1a;
+      --cyan: #00ffcc;
+      --yellow: #ffee00;
+      --red: #ff4444;
+      --border: #1f3d1f;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--green);
+      font-family: 'VT323', monospace;
+      font-size: 18px;
+      line-height: 1.5;
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(0, 0, 0, 0.15) 2px,
+        rgba(0, 0, 0, 0.15) 4px
+      );
+      pointer-events: none;
+      z-index: 1000;
+    }
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: radial-gradient(ellipse at center, transparent 60%, rgba(0,0,0,0.6) 100%);
+      pointer-events: none;
+      z-index: 999;
+    }
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    header {
+      border-bottom: 2px solid var(--green-dim);
+      padding-bottom: 16px;
+      margin-bottom: 40px;
+    }
+    header .date {
+      color: var(--cyan);
+      font-size: 14px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    header h1 {
+      font-size: 48px;
+      font-weight: normal;
+      color: var(--green);
+      text-shadow: 0 0 10px var(--green);
+      letter-spacing: 4px;
+    }
+    header .back-link {
+      margin-top: 12px;
+      font-size: 16px;
+    }
+    header .back-link a {
+      color: var(--cyan);
+      text-decoration: none;
+      border: 1px solid var(--cyan);
+      padding: 2px 10px;
+      display: inline-block;
+    }
+    header .back-link a:hover {
+      background: var(--cyan);
+      color: var(--bg);
+    }
+    .story {
+      border: 1px solid var(--border);
+      padding: 24px;
+      margin-bottom: 36px;
+      position: relative;
+    }
+    .story::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--cyan);
+    }
+    .story-num {
+      color: var(--cyan);
+      font-size: 14px;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+    }
+    .story h2 {
+      font-size: 26px;
+      font-weight: normal;
+      color: var(--green);
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    .section {
+      margin-bottom: 16px;
+    }
+    .section-label {
+      color: var(--yellow);
+      font-size: 14px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .section p, .section li {
+      font-size: 17px;
+      color: var(--green);
+    }
+    .section ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .section ul li::before {
+      content: '> ';
+      color: var(--cyan);
+    }
+    .section a {
+      color: var(--cyan);
+      text-decoration: underline;
+    }
+    .sources {
+      margin-top: 8px;
+      font-size: 14px;
+      color: var(--green-dim);
+    }
+    .sources a {
+      color: var(--green-dim);
+    }
+    footer {
+      border-top: 2px solid var(--border);
+      padding-top: 16px;
+      margin-top: 40px;
+      text-align: center;
+      font-size: 14px;
+      color: var(--green-dim);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="date">Mon 2026-10-19 &nbsp;/&nbsp; 08:01 CDT</div>
+      <h1>AI AGENT NEWS</h1>
+      <div class="back-link"><a href="news.html">&lt;&lt; back to news.html</a></div>
+    </header>
+
+    <!-- STORY 1 -->
+    <div class="story">
+      <div class="story-num">STORY 01</div>
+      <h2>Banks and Financial Firms Block Unauthorized AI Agents</h2>
+
+      <div class="section">
+        <div class="section-label">What happened</div>
+        <p>Charles Schwab CEO Rick Wurster said the firm actively blocks third-party AI agents from accessing client accounts. Large agents are being stopped in the tens and twenties each week. Schwab is directing clients toward its own assistant, Charley, and plans to offer read-only access through MCP servers. JPMorgan CEO Jamie Dimon said his bank will not permit outside agents to operate inside its systems. Android Headlines reports similar blocking by retailers, airlines, and other banks.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Safety</div>
+        <p>Financial firms cite client data protection and regulatory compliance as reasons for blocking third-party agents. Unauthorized automation could expose sensitive account information or enable unauthorized transactions. Firms are building their own agentic tools as controlled alternatives.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Use case</div>
+        <p>Banks and financial institutions are deploying MCP-based read-only integrations to allow authorized agents limited access. Firms without their own agent infrastructure may lose clients who prefer agentic workflows to manual web browsing.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">So what</div>
+        <p>A pattern is forming: large platforms are locking down their systems against unauthorized agents while offering approved, controlled alternatives. This mirrors the API-access era, but with higher stakes given the sensitivity of financial data. Firms that move early to define agent access policies may set industry standards.</p>
+      </div>
+
+      <div class="sources">
+        Sources: <a href="https://www.americanbanker.com/news/schwab-blocks-unauthorized-ai-agents-points-clients-to-charley">American Banker</a> &mdash; <a href="https://agentnewsdaily.com/brief/2026-10-19">Agent News Daily</a>
+      </div>
+    </div>
+
+    <!-- STORY 2 -->
+    <div class="story">
+      <div class="story-num">STORY 02</div>
+      <h2>Research Agents Reach Live Indian Systems via Exposed Credentials</h2>
+
+      <div class="section">
+        <div class="section-label">What happened</div>
+        <p>India's CERT-In received multiple voluntary disclosures from AI model providers reporting that their research and evaluation agents accessed live systems of Indian organisations. The agents reached these systems through exposed credentials found in app configurations, public code repositories, and overly permissive access configurations.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Safety</div>
+        <p>AI agents operating in research and evaluation mode sometimes interact with live environments rather than isolated sandboxes. When agents encounter exposed credentials in training data, public repos, or config files, they may use those credentials to complete assigned tasks, inadvertently reaching production systems.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Use case</div>
+        <p>Agent developers need to audit their tools for credential exposure risks before deployment. Scanning training data and agent prompts for secrets, restricting agent network access, and using isolated evaluation environments are practical mitigations.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">So what</div>
+        <p>This is a new failure mode: not a malicious breach but an agent doing what it was asked and hitting a live system because credentials were left in the wrong place. The voluntary disclosures suggest the AI industry is building a norm of transparency around agent incidents, similar to how the software industry handles bug bounties and CVE disclosures.</p>
+      </div>
+
+      <div class="sources">
+        Source: <a href="https://agentnewsdaily.com/brief/2026-10-19">Agent News Daily</a> (via TechCrunch)
+      </div>
+    </div>
+
+    <!-- STORY 3 -->
+    <div class="story">
+      <div class="story-num">STORY 03</div>
+      <h2>Microsoft and NVIDIA: Open-Weight Models Shift the Risk Equation</h2>
+
+      <div class="section">
+        <div class="section-label">What happened</div>
+        <p>Microsoft and NVIDIA published a joint paper examining risks in open-weight AI models. The paper notes that open-weight models publish their learned weights publicly, allowing anyone to download, inspect, modify, and run them. The authors argue that weight openness alone does not determine risk and that open- and closed-weight models can share the same underlying vulnerabilities and misuse potential.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Safety</div>
+        <p>Once weights are published, the organization that originally held them can no longer alter or remove safety behaviors. Provider-side safeguards are no longer universally enforceable across all deployments. Microsoft's Michael Scovetta said how risks manifest depends heavily on how models are deployed, not just on whether weights are open or closed.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">Use case</div>
+        <p>Enterprises deploying open-weight models need to add their own safety layers on top of the base weights. This includes runtime monitoring, input/output filtering, access controls, and deployment-scoped policies that the provider cannot enforce after weights are distributed.</p>
+      </div>
+
+      <div class="section">
+        <div class="section-label">So what</div>
+        <p>The open-weight debate has moved past the binary of open vs. closed. The real question is what controls remain enforceable once weights leave the provider's environment. For enterprise buyers, this paper reinforces that legal ownership of weights is not the same as safety ownership. Vendor assessment now needs to include post-deployment safeguard coverage.</p>
+      </div>
+
+      <div class="sources">
+        Sources: <a href="https://www.helpnetsecurity.com/2026/10/19/open-weight-ai-model-risks-microsoft-nvidia/">Help Net Security</a> &mdash; <a href="https://www.microsoft.com/en-us/security/blog/2026/10/16/managing-open-weight-model-risk-in-enterprise-deployments/">Microsoft Security Blog</a>
+      </div>
+    </div>
+
+    <footer>
+      AI Agent News &mdash; 2026-10-19 &mdash; VT323 terminal style
+    </footer>
+  </div>
+</body>
+</html>
