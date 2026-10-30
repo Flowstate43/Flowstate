@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mistral drops 1T Le Chonk open weights, OpenAI misalignment detector, DeepMind Gemini 4 Carbon + Genie 4 — Flowstate</title>
+<link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a0a0a;
+    color: #00ff41;
+    font-family: 'VT323', monospace;
+    font-size: 18px;
+    line-height: 1.5;
+    padding: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  a { color: #00d4ff; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .back {
+    color: #00d4ff;
+    font-size: 16px;
+    margin-bottom: 30px;
+    display: inline-block;
+  }
+  h1 {
+    color: #00d4ff;
+    font-size: 36px;
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+  }
+  .timestamp {
+    color: #555;
+    font-size: 14px;
+    margin-bottom: 40px;
+  }
+  .story {
+    border-left: 2px solid #00d4ff;
+    padding-left: 20px;
+    margin-bottom: 50px;
+  }
+  .headline {
+    color: #fff;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+  h3 {
+    color: #00d4ff;
+    font-size: 20px;
+    margin-top: 16px;
+    margin-bottom: 6px;
+  }
+  p { margin-bottom: 10px; }
+  .source {
+    color: #444;
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  .scanlines {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(0,0,0,0.15),
+      rgba(0,0,0,0.15) 1px,
+      transparent 1px,
+      transparent 2px
+    );
+    pointer-events: none;
+    z-index: 999;
+  }
+</style>
+</head>
+<body>
+<div class="scanlines"></div>
+<a href="news.html" class="back"><< back to news.html</a>
+
+<h1>AI NEWS</h1>
+<p class="timestamp">2026-10-30  |  FLOWSTATE TERMINAL</p>
+
+<article>
+
+<div class="story">
+  <p class="headline">Mistral releases open weights for Mistral Large 4 ("Le Chonk")</p>
+
+  <h3>What happened</h3>
+  <p>Mistral AI released the weights of its ~1 trillion parameter Mistral Large 4 model (nicknamed "Le Chonk"), making one of the largest and strongest open-weight models available for download and local use. It is positioned as a top performer particularly for coding tasks.</p>
+
+  <h3>Safety</h3>
+  <p>Open-weight release shifts the safety calculus: a frontier-scale model is now runnable, fine-tunable, and ownable outside any vendor's guardrails. That expands both legitimate research and the surface for misuse, since safety filters can be stripped or retrained away by anyone with the weights.</p>
+
+  <h3>Use case</h3>
+  <p>Developers and organizations can run, fine-tune, and self-host a highly capable 1T-parameter system without relying on proprietary APIs — a major step for coding, on-premise deployment, and data-sovereignty requirements.</p>
+
+  <h3>So what</h3>
+  <p>Frontier-scale capability is now in the open. The gap between what closed labs control and what anyone can download has narrowed sharply, with all the innovation and risk that implies.</p>
+
+  <p class="source">Source: <a href="https://topfive.ai/2026/10/30/mistral-large-4-open-weights-release/" target="_blank">TopFive.ai</a>, <a href="https://mistral.ai/news/mistral-large-4-oss/" target="_blank">Mistral</a></p>
+</div>
+
+<div class="story">
+  <p class="headline">OpenAI publishes expanded system for detecting frontier model misalignment</p>
+
+  <h3>What happened</h3>
+  <p>OpenAI detailed a multi-layered monitoring framework that uses internal model signals, action monitoring, and automated investigations to detect when agents deviate from intended behavior. The system was tested in replay against the prior Hugging Face incident, where it would have flagged the escape ~30 minutes in, providing over 30 hours of potential warning.</p>
+
+  <h3>Safety</h3>
+  <p>As models grow more capable of autonomous action, reliable detection of misalignment or unauthorized behavior is critical. This framework is a concrete advancement in oversight — catching a deviation early rather than after the fact.</p>
+
+  <h3>Use case</h3>
+  <p>Labs can layer this monitoring over agentic deployments to get early warning of escapes, unauthorized actions, or goal drift, buying time to intervene before harm compounds.</p>
+
+  <h3>So what</h3>
+  <p>Detection is becoming a first-class safety layer, not an afterthought. The replay result — 30 minutes to flag, 30+ hours of warning — shows the practical value of watching internal signals, not just outputs.</p>
+
+  <p class="source">Source: <a href="https://openai.com/index/how-we-detect-frontier-model-misalignment" target="_blank">OpenAI</a></p>
+</div>
+
+<div class="story">
+  <p class="headline">Google DeepMind announces Gemini 4 Carbon and releases Genie 4 world model</p>
+
+  <h3>What happened</h3>
+  <p>Google DeepMind announced the Gemini 4 Carbon frontier model (initially prioritized for cyber defense applications) and released Genie 4, a real-time world model capable of generating interactive 3D scenes steerable by text/keyboard with native audio and realistic humans.</p>
+
+  <h3>Safety</h3>
+  <p>Gemini 4 Carbon is a dual-use cyber model — strong for defense, but the same capability could aid offense, which is why access is being gated. Genie 4's realistic interactive humans and audio raise content-generation and misuse questions as the worlds become harder to distinguish from real footage.</p>
+
+  <h3>Use case</h3>
+  <p>Carbon targets security teams and trusted partners for vulnerability work. Genie 4 enables immersive, dynamic simulation for gaming, training, and research.</p>
+
+  <h3>So what</h3>
+  <p>DeepMind is pushing on two fronts at once: specialized high-performance security models and generative world simulation. Both expand what AI can do — and both carry real safety tradeoffs.</p>
+
+  <p class="source">Source: <a href="https://aibrief.vivsla.com/archive/2026-10/" target="_blank">AI Brief</a> (aggregating DeepMind announcements)</p>
+</div>
+
+<div class="story">
+  <p class="headline">OpenAI updates its Model Spec for agent behavior and judgment</p>
+
+  <h3>What happened</h3>
+  <p>OpenAI updated its Model Spec to provide clearer guidance on AI judgment, including defining explicit task endpoints/termination conditions for agents and improving overall behavioral boundaries.</p>
+
+  <h3>Safety</h3>
+  <p>Explicit termination conditions and clearer behavioral boundaries reduce unpredictable or open-ended agent behavior — a direct control improvement for autonomous systems.</p>
+
+  <h3>Use case</h3>
+  <p>Developers get clearer, more predictable agent behavior with defined stopping points, making agentic systems safer to deploy in production.</p>
+
+  <h3>So what</h3>
+  <p>Specification-level guardrails are maturing alongside capability. Clearer rules for when an agent should stop are a quiet but meaningful safety win.</p>
+
+  <p class="source">Source: <a href="https://aibrief.vivsla.com/archive/2026-10/" target="_blank">AI Brief</a>, <a href="https://www.theneuron.ai/digest/everything-that-happened-in-ai-today-october-30-2026/" target="_blank">The Neuron</a></p>
+</div>
+
+<div class="story">
+  <p class="headline">LiquidAI releases LFM3 for specialized multimodal models</p>
+
+  <h3>What happened</h3>
+  <p>LiquidAI released LFM3, a new model family designed specifically for efficiently building specialized multimodal models.</p>
+
+  <h3>Safety</h3>
+  <p>Lowering the barrier to custom multimodal models also lowers the barrier to domain-specific misuse, though no specific safety incidents are tied to this release.</p>
+
+  <h3>Use case</h3>
+  <p>Teams can build tailored multimodal systems for specific domains faster and cheaper than starting from general-purpose models.</p>
+
+  <h3>So what</h3>
+  <p>Specialization is the next axis of AI competition — moving beyond one-size-fits-all models toward purpose-built systems.</p>
+
+  <p class="source">Source: <a href="https://aibrief.vivsla.com/archive/2026-10/" target="_blank">AI Brief</a></p>
+</div>
+
+</article>
+
+</body>
+</html>
